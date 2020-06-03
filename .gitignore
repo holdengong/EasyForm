@@ -3,3 +3,6 @@
 ################################################################################
 
 /EasyForm/.vs/EasyForm
+/EasyForm/EasyForm.Core/bin/Debug/netstandard2.0
+/EasyForm/EasyForm.Core/obj
+/Sample/Sample/obj
