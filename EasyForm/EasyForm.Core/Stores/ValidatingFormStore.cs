@@ -22,9 +22,9 @@ namespace EasyForm.Core.Stores
             _validatorType = validator.GetType().FullName;
         }
 
-        public async Task<Form> FindFormByIdAsync(string formId)
+        public async Task<Form> FindFormByFormIdAsync(string formId)
         {
-            var form = await _inner.FindFormByIdAsync(formId);
+            var form = await _inner.FindFormByFormIdAsync(formId);
 
             if (form != null)
             {
@@ -35,12 +35,12 @@ namespace EasyForm.Core.Stores
 
                 if (context.IsValid)
                 {
-                    _logger.LogDebug("client configuration validation for client {id} succeeded.", form.Id);
+                    _logger.LogDebug("client configuration validation for client {id} succeeded.", form.FormId);
                     return form;
                 }
                 else
                 {
-                    _logger.LogError("Invalid form configuration for form {clientId}: {errorMessage}", form.Id, context.ErrorMessage);
+                    _logger.LogError("Invalid form configuration for form {clientId}: {errorMessage}", form.FormId, context.ErrorMessage);
                     return null;
                 }
             }

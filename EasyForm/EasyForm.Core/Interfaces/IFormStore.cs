@@ -7,6 +7,6 @@ namespace EasyForm.Core.Interfaces
 {
     public interface IFormStore
     {
-        Task<Form> FindFormByIdAsync(String formId);
+        Task<Form> FindFormByFormIdAsync(String formId);
     }
 }

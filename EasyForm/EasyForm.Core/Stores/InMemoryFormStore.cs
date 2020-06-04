@@ -14,7 +14,7 @@ namespace EasyForm.Core.Stores
 
         public InMemoryFormStore(IEnumerable<Form> forms)
         {
-            if (forms.HasDuplicates(_ => _.Id))
+            if (forms.HasDuplicates(_ => _.FormId))
             {
                 throw new ArgumentException("Forms must not contain duplicate ids");
             }
@@ -22,11 +22,11 @@ namespace EasyForm.Core.Stores
             this.forms = forms;
         }
 
-        public Task<Form> FindFormByIdAsync(string formId)
+        public Task<Form> FindFormByFormIdAsync(string formId)
         {
             var query =
                from form in forms
-               where form.Id == formId
+               where form.FormId == formId
                select form;
 
             return Task.FromResult(query.SingleOrDefault());

@@ -14,7 +14,7 @@ namespace EasyForm.UnitTests.Validation
 
             var testForm = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Description = "test",
                 Fields = new List<Field>
                 {

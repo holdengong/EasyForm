@@ -39,7 +39,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "",
+                FormId = "",
                 Fields = new List<Field>
                   {
                       new TextBox
@@ -58,7 +58,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = null
             };
             var context = new FormConfigurationValidationContext(form);
@@ -71,7 +71,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>()
             };
             var context = new FormConfigurationValidationContext(form);
@@ -84,7 +84,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new TextBox{ FieldName="" }
@@ -100,7 +100,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new TextBox{ FieldName = "1" },
@@ -117,7 +117,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Cascader{ FieldName="test" ,Options = null }
@@ -133,7 +133,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Cascader{ FieldName="test" ,Options = new List<OptionWithChild<int>>() }
@@ -149,7 +149,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Checkbox{ FieldName="test" ,Options = null }
@@ -165,7 +165,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Checkbox{ FieldName="test" ,Options = new List<Option<int>>() }
@@ -181,7 +181,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new MultiSelect{ FieldName="test" ,Options = null }
@@ -197,7 +197,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new MultiSelect{ FieldName="test" ,Options = new List<Option<int>>() }
@@ -213,7 +213,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Radio{ FieldName="test" ,Options = null }
@@ -229,7 +229,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Radio{ FieldName="test" ,Options = new List<Option<int>>() }
@@ -245,7 +245,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Select{ FieldName="test" ,Options = null }
@@ -261,7 +261,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Select{ FieldName="test" ,Options = new List<Option<int>>() }
@@ -277,7 +277,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Uploader{ FieldName="test", AllowFileTypes=null }
@@ -293,7 +293,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Uploader{ FieldName="test", AllowFileTypes= new List<string>() }
@@ -309,7 +309,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var form = new Form
             {
-                Id = "test",
+                FormId = "test",
                 Fields = new List<Field>
                 {
                     new Uploader

@@ -42,7 +42,7 @@ namespace EasyForm.Core.Validation.Default
                 return Task.CompletedTask;
             }
 
-            if (form.Id.IsMissing())
+            if (form.FormId.IsMissing())
             {
                 context.SetError("form id is missing");
                 return Task.CompletedTask;

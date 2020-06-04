@@ -5,7 +5,7 @@ namespace EasyForm
 {
     public class Form
     {
-        public string Id { get; set; }
+        public string FormId { get; set; }
         public string Description { get; set; }
         public IEnumerable<Field> Fields { get; set; }
     }

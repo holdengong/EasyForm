@@ -14,9 +14,9 @@ namespace EasyForm.UnitTests.Stores
         {
             var forms = new List<Form>
             {
-                new Form{  Id = "1"},
-                new Form{  Id = "1"},
-                new Form{  Id = "2"}
+                new Form{  FormId = "1"},
+                new Form{  FormId = "1"},
+                new Form{  FormId = "2"}
             };
             Action act = () => new InMemoryFormStore(forms);
             act.Should().Throw<ArgumentException>();
@@ -27,9 +27,9 @@ namespace EasyForm.UnitTests.Stores
         {
             var forms = new List<Form>
             {
-                new Form{  Id = "1"},
-                new Form{  Id = "2"},
-                new Form{  Id = "3"}
+                new Form{  FormId = "1"},
+                new Form{  FormId = "2"},
+                new Form{  FormId = "3"}
             };
             var store = new InMemoryFormStore(forms);
         }
