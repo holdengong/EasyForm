@@ -20,8 +20,7 @@ namespace EasyForm.Core
         {
             builder.Services.AddSingleton(forms);
 
-            builder.Services.TryAddTransient(typeof(InMemoryFormStore));
-            builder.Services.AddTransient<IFormStore, ValidatingFormStore<InMemoryFormStore>>();
+            builder.Services.AddTransient<IFormStore, InMemoryFormStore>();
 
             return builder;
         }

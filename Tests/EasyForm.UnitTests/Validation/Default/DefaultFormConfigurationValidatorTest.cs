@@ -13,12 +13,12 @@ namespace EasyForm.UnitTests.Validation.Default
 {
     public class DefaultFormConfigurationValidatorTest
     {
-        private readonly IFormConfigurationValidator validator;
+        private readonly IFormValidator validator;
         private readonly EasyFormOptions options;
         public DefaultFormConfigurationValidatorTest()
         {
             options = new EasyFormOptions();
-            validator = new DefaultFormConfigurationValidator(options);
+            validator = new DefaultFormValidator(options);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             foreach (var form in forms)
             {
-                var context = new FormConfigurationValidationContext(form);
+                var context = new FormValidationContext(form);
                 await validator.ValidateAsync(context);
                 context.IsValid.Should().BeTrue();
             }
@@ -48,7 +48,7 @@ namespace EasyForm.UnitTests.Validation.Default
                       }
                   }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -61,7 +61,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 FormId = "test",
                 Fields = null
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -74,7 +74,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 FormId = "test",
                 Fields = new List<Field>()
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -90,7 +90,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new TextBox{ FieldName="" }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -107,7 +107,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new TextBox{ FieldName = "1"}
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -123,7 +123,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Cascader{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -139,7 +139,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Cascader{ FieldName="test" ,Options = new List<OptionWithChild<int>>() }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -155,7 +155,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Checkbox{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -171,7 +171,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Checkbox{ FieldName="test" ,Options = new List<Option<int>>() }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -187,7 +187,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new MultiSelect{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -203,7 +203,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new MultiSelect{ FieldName="test" ,Options = new List<Option<int>>() }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -219,7 +219,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Radio{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -235,7 +235,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Radio{ FieldName="test" ,Options = new List<Option<int>>() }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -251,7 +251,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Select{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -267,7 +267,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Select{ FieldName="test" ,Options = new List<Option<int>>() }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -283,7 +283,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Uploader{ FieldName="test", AllowFileTypes=null }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -299,7 +299,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new Uploader{ FieldName="test", AllowFileTypes= new List<string>() }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -320,7 +320,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     }
                 }
             };
-            var context = new FormConfigurationValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }

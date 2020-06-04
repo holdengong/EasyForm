@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EasyForm.Core.Validation.Contexts
 {
-    public class FormConfigurationValidationContext
+    public class FormValidationContext
     {
         public Form Form { get; }
 
@@ -12,7 +12,7 @@ namespace EasyForm.Core.Validation.Contexts
 
         public string ErrorMessage { get; set; }
 
-        public FormConfigurationValidationContext(Form form)
+        public FormValidationContext(Form form)
         {
             Form = form;
         }
