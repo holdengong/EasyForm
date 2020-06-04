@@ -16,7 +16,7 @@ namespace EasyForm.Core.Stores
         public InMemoryFormStore(IEnumerable<Form> seedForms,
             IFormValidator formValidator)
         {
-            if (forms.HasDuplicates(_ => _.FormId))
+            if (seedForms.HasDuplicates(_ => _.FormId))
             {
                 throw new ArgumentException("Forms must not contain duplicate ids");
             }
@@ -30,6 +30,16 @@ namespace EasyForm.Core.Stores
 
         public async Task AddAsync(Form form)
         {
+            if (form == null)
+            {
+                throw new ArgumentNullException(nameof(form));
+            }
+
+            if (forms.Any(_ => _.FormId == form.FormId))
+            {
+                throw new ArgumentException("form id already exist");
+            }
+
             var context = new FormValidationContext(form);
             await formValidator.ValidateAsync(context);
             if (!context.IsValid)
