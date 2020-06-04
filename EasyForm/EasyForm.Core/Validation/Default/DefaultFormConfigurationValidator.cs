@@ -67,6 +67,11 @@ namespace EasyForm.Core.Validation.Default
                 return;
             }
 
+            if (fields.HasDuplicates(_ => _.FieldName))
+            {
+                context.SetError("field name has duplicates");
+            }
+
             await ValidateCheckBoxAsync(context);
             if (!context.IsValid) return;
 
@@ -102,6 +107,21 @@ namespace EasyForm.Core.Validation.Default
 
             await ValidateTimeAsync(context);
             if (!context.IsValid) return;
+
+            await ValidateCascaderAsync(context);
+            if (!context.IsValid) return;
+
+            await ValidateColorPickerAsync(context);
+            if (!context.IsValid) return;
+
+            await ValidateSliderAsync(context);
+            if (!context.IsValid) return;
+
+            await ValidateSwitchAsync(context);
+            if (!context.IsValid) return;
+
+            await ValidateUploadAsync(context);
+            if (!context.IsValid) return;
         }
 
         protected virtual Task ValidateTextBoxAsync(FormConfigurationValidationContext context)
@@ -111,7 +131,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateCheckBoxAsync(FormConfigurationValidationContext context)
         {
-            await ValidateOptionsAsync<Checkbox, int>(context);
+            await ValidateOptionsAsync<Checkbox, int,Option<int>>(context);
         }
 
         protected virtual Task ValidateDateBoxAsync(FormConfigurationValidationContext context)
@@ -136,12 +156,12 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateMultiSelectAsync(FormConfigurationValidationContext context)
         {
-            await ValidateOptionsAsync<MultiSelect, int>(context);
+            await ValidateOptionsAsync<MultiSelect, int, Option<int>>(context);
         }
 
         protected async virtual Task ValidateRadioAsync(FormConfigurationValidationContext context)
         {
-            await ValidateOptionsAsync<Radio, int>(context);
+            await ValidateOptionsAsync<Radio, int,Option<int>>(context);
         }
 
         protected virtual Task ValidateRichTextAsync(FormConfigurationValidationContext context)
@@ -151,7 +171,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateSelectAsync(FormConfigurationValidationContext context)
         {
-            await ValidateOptionsAsync<Select, int>(context);
+            await ValidateOptionsAsync<Select, int,Option<int>>(context);
         }
 
         protected virtual Task ValidateTextAreaAsync(FormConfigurationValidationContext context)
@@ -164,11 +184,57 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateOptionsAsync<T1, T2>(FormConfigurationValidationContext context)
-            where T1 : IComponentHasOptions<T2>
-            where T2 : struct
+        protected async virtual Task ValidateCascaderAsync(FormConfigurationValidationContext context)
         {
-            var fields = context.Form.Fields.Where(_ => _ is T1) as IEnumerable<T1>;
+            await ValidateOptionsAsync<Cascader, int, OptionWithChild<int>>(context);
+        }
+
+        protected virtual Task ValidateColorPickerAsync(FormConfigurationValidationContext context)
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task ValidateSliderAsync(FormConfigurationValidationContext context)
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task ValidateSwitchAsync(FormConfigurationValidationContext context)
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task ValidateUploadAsync(FormConfigurationValidationContext context)
+        {
+            var uploads = context.Form.Fields.Where(_ => _ is Uploader)?.Select(_ => _ as Uploader);
+            if (uploads.IsNullOrEmpty()) return Task.CompletedTask;
+
+            foreach (var upload in uploads)
+            {
+                if (upload.AllowFileTypes.IsNullOrEmpty())
+                {
+                    context.SetError("allow file types is empty");
+                    return Task.CompletedTask;
+                }
+
+                if (upload.IsMultiple && upload.CountLimit <= 0)
+                {
+                    context.SetError("is multiple set true, but count limit is 0 or negative");
+                    return Task.CompletedTask;
+                }
+            }
+
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task ValidateOptionsAsync<TComponentType, TOptionValueType,TOptionType>(FormConfigurationValidationContext context)
+            where TComponentType : class,IComponentHasOptions<TOptionValueType,TOptionType>,new()
+            where TOptionValueType : struct
+            where TOptionType : Option<TOptionValueType>
+        {
+            var fields = context.Form.Fields.Where(_ => _ is TComponentType)
+                ?.Select(_ => _ as TComponentType);
+
             if (fields.IsNullOrEmpty()) return Task.CompletedTask;
 
             foreach (var field in fields)

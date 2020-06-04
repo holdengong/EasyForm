@@ -4,9 +4,10 @@ using System.Text;
 
 namespace EasyForm.Core.Interfaces
 {
-    public interface IComponentHasOptions<T>
-        where T : struct
+    public interface IComponentHasOptions<TOptionValueType, TOptionType>
+        where TOptionType : Option<TOptionValueType>
+        where TOptionValueType:struct
     {
-        IEnumerable<Option<T>> Options { get; set; }
+        IEnumerable<TOptionType> Options { get; set; }
     }
 }

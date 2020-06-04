@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EasyForm.Core.Models.Components
 {
-    public class Radio : NumberField<int>, IComponentHasOptions<int>
+    public class Radio : NumberField<int>, IComponentHasOptions<int,Option<int>>
     {
         public IEnumerable<Option<int>> Options { get; set; }
     }

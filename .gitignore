@@ -6,3 +6,5 @@
 /EasyForm/EasyForm.Core/bin/Debug/netstandard2.0
 /EasyForm/EasyForm.Core/obj
 /Sample/Sample/obj
+/Tests/EasyForm.UnitTests/obj
+/Tests/EasyForm.UnitTests/bin/Debug/netcoreapp3.1

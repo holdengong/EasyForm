@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace EasyForm.Core.Models.Components
 {
-    public class MultiSelect : ArrayField<int>, IComponentHasOptions<int>
+    public class MultiSelect : ArrayField<int>, IComponentHasOptions<int,Option<int>>
     {
         public IEnumerable<Option<int>> Options { get; set; }
     }
