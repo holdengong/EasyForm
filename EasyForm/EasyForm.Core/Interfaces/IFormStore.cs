@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Interfaces
 {
-    interface IFormStore
+    public interface IFormStore
     {
         Task<Form> FindFormByIdAsync(String formId);
     }

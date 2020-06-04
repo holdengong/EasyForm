@@ -1,6 +1,8 @@
 ﻿using EasyForm.Core.Configuration;
 using EasyForm.Core.Interfaces;
+using EasyForm.Core.Stores;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +19,9 @@ namespace EasyForm.Core
         public static IEasyFormBuilder AddInMemoryForms(this IEasyFormBuilder builder,IEnumerable<Form> forms)
         {
             builder.Services.AddSingleton(forms);
+
+            builder.Services.TryAddTransient(typeof(InMemoryFormStore));
+            builder.Services.AddTransient<IFormStore, ValidatingFormStore<InMemoryFormStore>>();
 
             return builder;
         }
