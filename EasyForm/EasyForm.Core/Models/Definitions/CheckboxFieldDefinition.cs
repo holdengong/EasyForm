@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace EasyForm.Core.Models.Definitions
 {
-    public class CheckboxFieldDefinition : ObjectFieldDefinition<int>, IComponentHasOptions<int, Option<int>>
+    public class CheckboxFieldDefinition : ObjectFieldDefinition<int>, IFieldHasOptions<int, Option<int>>
     {
         public IEnumerable<Option<int>> Options { get; set; }
     }

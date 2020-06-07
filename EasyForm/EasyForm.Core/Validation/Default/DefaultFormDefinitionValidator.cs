@@ -228,7 +228,7 @@ namespace EasyForm.Core.Validation.Default
         }
 
         protected virtual Task ValidateOptionsAsync<TComponentType, TOptionValueType,TOptionType>(FormDefinitionValidationContext context)
-            where TComponentType : class,IComponentHasOptions<TOptionValueType,TOptionType>,new()
+            where TComponentType : class,IFieldHasOptions<TOptionValueType,TOptionType>,new()
             where TOptionValueType : struct
             where TOptionType : Option<TOptionValueType>
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace EasyForm.Core.Models.Definitions
 {
-    public class CascaderFieldDefinition : ObjectFieldDefinition<OptionWithChild<int>>, IComponentHasOptions<int, OptionWithChild<int>>
+    public class CascaderFieldDefinition : ObjectFieldDefinition<OptionWithChild<int>>, IFieldHasOptions<int, OptionWithChild<int>>
     {
         public IEnumerable<OptionWithChild<int>> Options { get; set; }
     }

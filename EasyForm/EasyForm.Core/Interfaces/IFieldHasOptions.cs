@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EasyForm.Core.Interfaces
 {
-    public interface IComponentHasOptions<TOptionValueType, TOptionType>
+    public interface IFieldHasOptions<TOptionValueType, TOptionType>
         where TOptionType : Option<TOptionValueType>
         where TOptionValueType:struct
     {
