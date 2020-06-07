@@ -74,6 +74,17 @@ namespace EasyForm.Core.Extensions
         }
 
         [DebuggerStepThrough]
+        public static bool IsTooLong(this string value, int maxLength)
+        {
+            if (value.IsPresent() && value.Length > maxLength)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        [DebuggerStepThrough]
         public static bool IsPresent(this string value)
         {
             return !string.IsNullOrWhiteSpace(value);

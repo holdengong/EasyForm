@@ -8,3 +8,8 @@
 /Sample/Sample/obj
 /Tests/EasyForm.UnitTests/obj
 /Tests/EasyForm.UnitTests/bin/Debug/netcoreapp3.1
+/Tests/EasyForm.Core.UnitTests/bin/Debug/netcoreapp3.1
+/Tests/EasyForm.Core.UnitTests/obj
+/EasyForm/EasyForm.EntityFrameCore/bin/Debug/netstandard2.0
+/EasyForm/EasyForm.EntityFrameCore/obj
+/EasyForm/TestResults/270f48fe-c487-4294-8eb5-710e0c68b347

@@ -1,8 +1,8 @@
 ﻿using EasyForm.Core.Configuration;
 using EasyForm.Core.Interfaces;
+using EasyForm.Core.Models.Definitions;
 using EasyForm.Core.Stores;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 
@@ -16,11 +16,11 @@ namespace EasyForm.Core
             return new EasyFormBuilder(services);
         }
 
-        public static IEasyFormBuilder AddInMemoryForms(this IEasyFormBuilder builder,IEnumerable<Form> forms)
+        public static IEasyFormBuilder AddInMemoryFormDefinitions(this IEasyFormBuilder builder,IEnumerable<FormDefinition> forms)
         {
             builder.Services.AddSingleton(forms);
 
-            builder.Services.AddTransient<IFormStore, InMemoryFormStore>();
+            builder.Services.AddTransient<IFormDefinitionStore, InMemoryFormStore>();
 
             return builder;
         }
