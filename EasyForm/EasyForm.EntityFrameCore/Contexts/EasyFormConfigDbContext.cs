@@ -26,12 +26,12 @@ namespace EasyForm.EntityFrameCore.Contexts
             this.storeOptions = storeOptions ?? throw new ArgumentNullException(nameof(storeOptions));
         }
 
-        public DbSet<FormEntity> Forms { get; set; }
-        public DbSet<BoolFieldEntity> BoolFields { get; set; }
-        public DbSet<DateTimeFieldEntity> DateTimeFields { get; set; }
-        public DbSet<DecimalFieldEntity> DecimalFields { get; set; }
-        public DbSet<IntFieldEntity> IntFields { get; set; }
-        public DbSet<ObjectFieldEntity> ObjectFields { get; set; }
+        public DbSet<FormDefinitionEntity> FormDefinitions { get; set; }
+        public DbSet<BoolFieldDefinitionEntity> BoolFieldDefinitions { get; set; }
+        public DbSet<DateTimeFieldDefinitionEntity> DateTimeFieldDefinitions { get; set; }
+        public DbSet<DecimalFieldDefinitionEntity> DecimalFieldDefinitions { get; set; }
+        public DbSet<IntFieldDefinitionEntity> IntFieldDefinitions { get; set; }
+        public DbSet<ObjectFieldDefinitionEntity> ObjectFieldDefinitions { get; set; }
 
         public Task<int> SaveChangesAsync()
         {

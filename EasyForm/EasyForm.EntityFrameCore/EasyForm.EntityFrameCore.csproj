@@ -12,8 +12,4 @@
     <ProjectReference Include="..\EasyForm.Core\EasyForm.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\Record\" />
-  </ItemGroup>
-
 </Project>

@@ -9,12 +9,12 @@ namespace EasyForm.EntityFrameCore.Interfaces
 {
     public interface IEasyFormConfigDbContext : IDisposable
     {
-        DbSet<FormEntity> Forms { get; set; }
-        DbSet<BoolFieldEntity> BoolFields { get; set; }
-        DbSet<DateTimeFieldEntity> DateTimeFields { get; set; }
-        DbSet<DecimalFieldEntity> DecimalFields { get; set; }
-        DbSet<IntFieldEntity> IntFields { get; set; }
-        DbSet<ObjectFieldEntity> ObjectFields { get; set; }
+        DbSet<FormDefinitionEntity> FormDefinitions { get; set; }
+        DbSet<BoolFieldDefinitionEntity> BoolFieldDefinitions { get; set; }
+        DbSet<DateTimeFieldDefinitionEntity> DateTimeFieldDefinitions { get; set; }
+        DbSet<DecimalFieldDefinitionEntity> DecimalFieldDefinitions { get; set; }
+        DbSet<IntFieldDefinitionEntity> IntFieldDefinitions { get; set; }
+        DbSet<ObjectFieldDefinitionEntity> ObjectFieldDefinitions { get; set; }
         int SaveChanges();
         Task<int> SaveChangesAsync();
     }

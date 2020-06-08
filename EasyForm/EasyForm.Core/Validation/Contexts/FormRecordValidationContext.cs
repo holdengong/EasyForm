@@ -14,16 +14,16 @@ namespace EasyForm.Core.Validation.Contexts
 
         public string ErrorMessage { get; set; }
 
-        public Dictionary<FieldRecord, string> FieldRecordErrors { get; set; } 
+        public Dictionary<FieldValue, string> FieldRecordErrors { get; set; } 
 
         public FormRecordValidationContext(FormDefinition formDefinition,FormRecord formRecord)
         {
             FormDefinition = formDefinition;
             FormRecord = formRecord;
-            FieldRecordErrors = new Dictionary<FieldRecord, string>();
+            FieldRecordErrors = new Dictionary<FieldValue, string>();
         }
 
-        public void AddRecordError(FieldRecord record, string message)
+        public void AddRecordError(FieldValue record, string message)
         {
             FieldRecordErrors.Add(record, message);
             SetError("invalid record");
