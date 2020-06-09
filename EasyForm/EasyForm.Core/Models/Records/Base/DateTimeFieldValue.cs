@@ -2,7 +2,7 @@
 
 namespace EasyForm.Core.Models.Records.Base
 {
-    public class DateTimeFieldValue : FieldRecord<DateTime?>
+    public class DateTimeFieldValue : FieldValue<DateTime?>
     {
     }
 }

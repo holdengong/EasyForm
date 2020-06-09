@@ -7,7 +7,6 @@ namespace EasyForm.Core.Validation.Contexts
 {
     public class FormRecordValidationContext
     {
-        public FormDefinition FormDefinition { get; }
         public FormRecord FormRecord { get; }
 
         public bool IsValid { get; set; } = true;
@@ -16,11 +15,13 @@ namespace EasyForm.Core.Validation.Contexts
 
         public Dictionary<FieldValue, string> FieldRecordErrors { get; set; } 
 
-        public FormRecordValidationContext(FormDefinition formDefinition,FormRecord formRecord)
+        public string FormId { get; set; }
+
+        public FormRecordValidationContext(string formId, FormRecord formRecord)
         {
-            FormDefinition = formDefinition;
             FormRecord = formRecord;
             FieldRecordErrors = new Dictionary<FieldValue, string>();
+            FormId = formId;
         }
 
         public void AddRecordError(FieldValue record, string message)

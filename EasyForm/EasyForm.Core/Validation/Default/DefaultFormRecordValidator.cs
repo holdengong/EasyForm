@@ -30,119 +30,99 @@ namespace EasyForm.Core.Validation.Default
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.FormDefinition == null)
-            {
-                throw new ArgumentNullException(nameof(context.FormDefinition));
-            }
-
-            if (context.FormRecord == null)
-            {
-                throw new ArgumentNullException(nameof(context.FormRecord));
-            }
-
-            await ValidateFormRecordsAsync(context);
-            if (!context.IsValid) return;
-
-            await ValidateFieldRecordsAsync(context);
-            if (!context.IsValid) return;
-        }
-
-        protected virtual Task ValidateFormRecordsAsync(FormRecordValidationContext context)
-        {
             var formRecord = context.FormRecord;
+
             if (formRecord == null)
             {
-                context.SetError("form record is null");
-                return Task.CompletedTask;
+                throw new ArgumentNullException(nameof(formRecord));
             }
 
             if (formRecord.FormDefinitionId.IsMissing())
             {
-                context.SetError("form definition id is missing");
-                return Task.CompletedTask;
+                throw new ArgumentNullException(nameof(formRecord.FormDefinitionId));
             }
 
             if (formRecord.FieldValues.IsNullOrEmpty())
             {
-                context.SetError("form field records is null or empty");
-                return Task.CompletedTask;
+                throw new ArgumentNullException(nameof(formRecord.FieldValues));
             }
 
-            return Task.CompletedTask;
+            var fieldValues = formRecord.FieldValues;
+
+            if (fieldValues.IsNullOrEmpty())
+            {
+                throw new ArgumentNullException(nameof(context.FormRecord.FieldValues));
+            }
+
+            if (fieldValues.Any(_ => _.FieldDefinition == null))
+            {
+                throw new ArgumentNullException("field definition");
+            }
+
+            if (fieldValues.Any(_ => _.FieldDefinition.FieldName.IsMissing()))
+            {
+                throw new ArgumentNullException("field name");
+            }
+
+            await ValidateFieldValuesAsync(context);
+            if (!context.IsValid) return;
         }
 
-        protected async virtual Task ValidateFieldRecordsAsync(FormRecordValidationContext context)
+        protected async virtual Task ValidateFieldValuesAsync(FormRecordValidationContext context)
         {
-            var fieldRecords = context.FormRecord.FieldValues;
-
-            if (fieldRecords.IsNullOrEmpty())
-            {
-                context.SetError("field records is null or empty");
-            }
-
-            if (fieldRecords.Any(_ => _.FieldDefinition == null))
-            {
-                context.SetError("field definition is null");
-            }
-
-            if (fieldRecords.Any(_ => _.FieldDefinition.FieldName.IsMissing()))
-            {
-                context.SetError("field name is null");
-            }
-
-            await ValidateCheckBoxAsync(context);
+            await ValidateCheckboxFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateDateBoxAsync(context);
+            await ValidateDateFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateDateTimeBoxAsync(context);
+            await ValidateDateTimeFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateDecimalBoxAsync(context);
+            await ValidateDecimalFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateIntBoxAsync(context);
+            await ValidateIntFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateMultiSelectAsync(context);
+            await ValidateMultiSelectFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateRadioAsync(context);
+            await ValidateRadioFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateRichTextAsync(context);
+            await ValidateRichTextFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateSelectAsync(context);
+            await ValidateSelectFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateTextAreaAsync(context);
+            await ValidateTextAreaFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateTextBoxAsync(context);
+            await ValidateTextboxFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateTimeAsync(context);
+            await ValidateTimeFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateCascaderAsync(context);
+            await ValidateCascaderFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateColorPickerAsync(context);
+            await ValidateColorPickerFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateSliderAsync(context);
+            await ValidateSliderFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateSwitchAsync(context);
+            await ValidateSwitchFieldValueAsync(context);
             if (!context.IsValid) return;
 
-            await ValidateUploadAsync(context);
+            await ValidateUploadFieldValueAsync(context);
             if (!context.IsValid) return;
         }
 
-        protected async virtual Task ValidateTextBoxAsync(FormRecordValidationContext context)
+        protected async virtual Task ValidateTextboxFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is TextboxFieldValue).Select(_ => _ as TextboxFieldValue);
 
@@ -157,7 +137,7 @@ namespace EasyForm.Core.Validation.Default
 
                 if (fieldDefinition.IsUnique && record.Value.IsPresent())
                 {
-                    var fieldRecordValidationContext = new FieldRecordUniqueValidationContext(context.FormDefinition.FormId, record);
+                    var fieldRecordValidationContext = new FieldRecordUniqueValidationContext(context.FormId, record);
                     await _fieldRecordUniqueValidator.ValidateAsync(fieldRecordValidationContext);
                     if (!fieldRecordValidationContext.IsValid)
                     {
@@ -172,7 +152,7 @@ namespace EasyForm.Core.Validation.Default
             }
         }
 
-        protected virtual Task ValidateCheckBoxAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateCheckboxFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is CheckboxFieldValue).Select(_ => _ as CheckboxFieldValue);
 
@@ -189,7 +169,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateDateBoxAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateDateFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is DateFieldValue).Select(_ => _ as DateFieldValue);
 
@@ -206,7 +186,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateDateTimeBoxAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateDateTimeFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is DateTimeFieldValue).Select(_ => _ as DateTimeFieldValue);
 
@@ -223,7 +203,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateDecimalBoxAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateDecimalFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is DecimalFieldValue).Select(_ => _ as DecimalFieldValue);
 
@@ -245,7 +225,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected async virtual Task ValidateIntBoxAsync(FormRecordValidationContext context)
+        protected async virtual Task ValidateIntFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is IntFieldValue).Select(_ => _ as IntFieldValue);
 
@@ -260,7 +240,7 @@ namespace EasyForm.Core.Validation.Default
 
                 if (fieldDefinition.IsUnique && record.Value.HasValue)
                 {
-                    var fieldRecordValidationContext = new FieldRecordUniqueValidationContext(context.FormDefinition.FormId, record);
+                    var fieldRecordValidationContext = new FieldRecordUniqueValidationContext(context.FormId, record);
                     await _fieldRecordUniqueValidator.ValidateAsync(fieldRecordValidationContext);
                     if (!fieldRecordValidationContext.IsValid)
                     {
@@ -275,7 +255,7 @@ namespace EasyForm.Core.Validation.Default
             }
         }
 
-        protected virtual Task ValidateMultiSelectAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateMultiSelectFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is MultiSelectFieldValue).Select(_ => _ as MultiSelectFieldValue);
 
@@ -292,7 +272,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateRadioAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateRadioFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is CheckboxFieldValue).Select(_ => _ as CheckboxFieldValue);
 
@@ -309,7 +289,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateRichTextAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateRichTextFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is RichTextFieldValue).Select(_ => _ as RichTextFieldValue);
 
@@ -326,7 +306,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateSelectAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateSelectFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is SelectFieldValue).Select(_ => _ as SelectFieldValue);
 
@@ -334,7 +314,7 @@ namespace EasyForm.Core.Validation.Default
             {
                 var fieldDefinition = record.FieldDefinition as SelectFieldDefinition;
 
-                if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
+                if (fieldDefinition.IsRequired && !record.Value.HasValue)
                 {
                     context.AddRecordError(record, "required validation failure");
                 }
@@ -343,15 +323,15 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateTextAreaAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateTextAreaFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is TextAreaFieldValue).Select(_ => _ as SelectFieldValue);
+            var records = context.FormRecord.FieldValues.Where(_ => _ is TextAreaFieldValue).Select(_ => _ as TextAreaFieldValue);
 
             foreach (var record in records)
             {
                 var fieldDefinition = record.FieldDefinition as TextAreaFieldDefinition;
 
-                if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
+                if (fieldDefinition.IsRequired && record.Value.IsMissing())
                 {
                     context.AddRecordError(record, "required validation failure");
                 }
@@ -360,7 +340,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateTimeAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateTimeFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is TimeFieldValue).Select(_ => _ as TimeFieldValue);
 
@@ -377,7 +357,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateCascaderAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateCascaderFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is CascaderFieldValue).Select(_ => _ as CascaderFieldValue);
 
@@ -394,7 +374,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateColorPickerAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateColorPickerFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is ColorPickerFieldValue).Select(_ => _ as ColorPickerFieldValue);
 
@@ -411,7 +391,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateSliderAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateSliderFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is SliderFieldValue).Select(_ => _ as SliderFieldValue);
 
@@ -423,12 +403,17 @@ namespace EasyForm.Core.Validation.Default
                 {
                     context.AddRecordError(record, "required validation failure");
                 }
+
+                if (record.Value.IsOutOfRange(fieldDefinition.Min, fieldDefinition.Max))
+                {
+                    context.AddRecordError(record, "range validation failure");
+                }
             }
 
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateSwitchAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateSwitchFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is SwitchFieldValue).Select(_ => _ as SwitchFieldValue);
 
@@ -445,7 +430,7 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateUploadAsync(FormRecordValidationContext context)
+        protected virtual Task ValidateUploadFieldValueAsync(FormRecordValidationContext context)
         {
             var records = context.FormRecord.FieldValues.Where(_ => _ is UploaderFieldValue).Select(_ => _ as UploaderFieldValue);
 

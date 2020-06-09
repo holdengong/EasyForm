@@ -19,8 +19,8 @@ namespace EasyForm.Core.Extensions
         [DebuggerStepThrough]
         public static bool IsOutOfRange(this decimal num, decimal? min, decimal? max)
         {
-            if (min.HasValue && num <= min.Value) return true;
-            if (max.HasValue && num >= max.Value) return true;
+            if (min.HasValue && num < min.Value) return true;
+            if (max.HasValue && num > max.Value) return true;
             return false;
         }
     }

@@ -4,7 +4,7 @@ namespace EasyForm.Core.Validation.Contexts
 {
     public class FieldRecordUniqueValidationContext
     {
-        public string FormDefinitionId { get; set; }
+        public string FormId { get; set; }
 
         public FieldValue FieldReocrd { get; }
 
@@ -12,9 +12,9 @@ namespace EasyForm.Core.Validation.Contexts
 
         public string ErrorMessage { get; set; }
 
-        public FieldRecordUniqueValidationContext(string formDefinitionId, FieldValue fieldRecord)
+        public FieldRecordUniqueValidationContext(string formId, FieldValue fieldRecord)
         {
-            FormDefinitionId = formDefinitionId;
+            FormId = formId;
             FieldReocrd = fieldRecord;
         }
 

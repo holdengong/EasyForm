@@ -2,7 +2,7 @@
 
 namespace EasyForm.Core.Models.Records
 {
-    public class SelectFieldValue : StringFieldValue
+    public class SelectFieldValue : IntFieldValue
     {
     }
 }

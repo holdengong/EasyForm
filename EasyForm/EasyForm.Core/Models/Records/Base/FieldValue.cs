@@ -19,7 +19,7 @@ namespace EasyForm.Core.Models.Records.Base
         }
     }
 
-    public abstract class FieldRecord<T> : FieldValue
+    public abstract class FieldValue<T> : FieldValue
     {
         public T Value { get; set; }
     }

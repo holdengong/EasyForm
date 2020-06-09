@@ -1,6 +1,6 @@
 ﻿namespace EasyForm.Core.Models.Records.Base
 {
-    public abstract class StringFieldValue : FieldRecord<string>
+    public abstract class StringFieldValue : FieldValue<string>
     {
     }
 }

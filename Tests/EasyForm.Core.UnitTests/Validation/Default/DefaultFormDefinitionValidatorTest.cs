@@ -6,16 +6,17 @@ using EasyForm.Core.Validation.Contexts;
 using EasyForm.Core.Validation.Default;
 using FluentAssertions;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace EasyForm.UnitTests.Validation.Default
 {
-    public class DefaultFormConfigurationValidatorTest
+    public class DefaultFormDefinitionValidatorTest
     {
         private readonly IFormDefinitionValidator validator;
         private readonly EasyFormOptions options;
-        public DefaultFormConfigurationValidatorTest()
+        public DefaultFormDefinitionValidatorTest()
         {
             options = new EasyFormOptions();
             validator = new DefaultFormDefinitionValidator(options);
@@ -24,7 +25,7 @@ namespace EasyForm.UnitTests.Validation.Default
         [Fact]
         public async Task Valid_should_success()
         {
-            var forms = TestForms.GetForms();
+            var forms = TestData.FormDefinitions;
 
             foreach (var form in forms)
             {
