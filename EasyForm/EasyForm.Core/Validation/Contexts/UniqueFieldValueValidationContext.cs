@@ -2,20 +2,20 @@
 
 namespace EasyForm.Core.Validation.Contexts
 {
-    public class FieldRecordUniqueValidationContext
+    public class UniqueFieldValueValidationContext
     {
         public string FormId { get; set; }
 
-        public FieldValue FieldReocrd { get; }
+        public FieldValue FieldValue { get; }
 
         public bool IsValid { get; set; } = true;
 
         public string ErrorMessage { get; set; }
 
-        public FieldRecordUniqueValidationContext(string formId, FieldValue fieldRecord)
+        public UniqueFieldValueValidationContext(string formId, FieldValue fieldValue)
         {
             FormId = formId;
-            FieldReocrd = fieldRecord;
+            FieldValue = fieldValue;
         }
 
         public void SetError(string message)

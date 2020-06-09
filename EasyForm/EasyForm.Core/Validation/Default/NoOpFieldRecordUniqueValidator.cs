@@ -6,7 +6,7 @@ namespace EasyForm.Core.Validation.Default
 {
     public class NoOpFieldRecordUniqueValidator : IFieldRecordUniqueValidator
     {
-        public Task ValidateAsync(FieldRecordUniqueValidationContext context)
+        public Task ValidateAsync(UniqueFieldValueValidationContext context)
         {
             return Task.CompletedTask;
         }

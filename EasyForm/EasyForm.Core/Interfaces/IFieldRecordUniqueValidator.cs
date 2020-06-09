@@ -8,6 +8,6 @@ namespace EasyForm.Core.Interfaces
 {
     public interface IFieldRecordUniqueValidator
     {
-        Task ValidateAsync(FieldRecordUniqueValidationContext context);
+        Task ValidateAsync(UniqueFieldValueValidationContext context);
     }
 }

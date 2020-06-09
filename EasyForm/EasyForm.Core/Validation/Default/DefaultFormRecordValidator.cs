@@ -137,7 +137,7 @@ namespace EasyForm.Core.Validation.Default
 
                 if (fieldDefinition.IsUnique && record.Value.IsPresent())
                 {
-                    var fieldRecordValidationContext = new FieldRecordUniqueValidationContext(context.FormId, record);
+                    var fieldRecordValidationContext = new UniqueFieldValueValidationContext(context.FormId, record);
                     await _fieldRecordUniqueValidator.ValidateAsync(fieldRecordValidationContext);
                     if (!fieldRecordValidationContext.IsValid)
                     {
@@ -240,7 +240,7 @@ namespace EasyForm.Core.Validation.Default
 
                 if (fieldDefinition.IsUnique && record.Value.HasValue)
                 {
-                    var fieldRecordValidationContext = new FieldRecordUniqueValidationContext(context.FormId, record);
+                    var fieldRecordValidationContext = new UniqueFieldValueValidationContext(context.FormId, record);
                     await _fieldRecordUniqueValidator.ValidateAsync(fieldRecordValidationContext);
                     if (!fieldRecordValidationContext.IsValid)
                     {
