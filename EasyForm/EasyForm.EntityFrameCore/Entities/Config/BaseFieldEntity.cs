@@ -4,11 +4,13 @@ using System.Text;
 
 namespace EasyForm.EntityFrameCore.Entities.Config
 {
-    public class BaseFieldDefinitionEntity : BaseEntity
+    public class BaseFieldEntity : BaseEntity
     {
         public string FieldName { get; set; }
         public string Description { get; set; }
         public bool IsRequired { get; set; }
         public bool IsUnique { get; set; }
+        public int FormId { get; set; }
+        public FormEntity Form { get; set; }
     }
 }

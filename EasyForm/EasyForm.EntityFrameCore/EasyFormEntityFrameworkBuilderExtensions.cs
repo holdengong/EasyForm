@@ -19,13 +19,13 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddFormStore(this IServiceCollection services,
           Action<FormStoreOptions> storeOptionsAction = null)
         {
-            return services.AddFormStore<EasyFormConfigDbContext>(storeOptionsAction);
+            return services.AddFormStore<FormDbContext>(storeOptionsAction);
         }
 
         public static IServiceCollection AddFormStore<TContext>(
             this IServiceCollection services,
             Action<FormStoreOptions> storeOptionsAction = null)
-            where TContext : DbContext, IEasyFormConfigDbContext
+            where TContext : DbContext, IFormConfigDbContext
         {
             var options = new FormStoreOptions();
             services.AddSingleton(options);
@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.ConfigureDbContext?.Invoke(dbCtxBuilder);
             });
 
-            services.AddScoped<IEasyFormConfigDbContext, TContext>();
+            services.AddScoped<IFormConfigDbContext, TContext>();
 
             return services;
         }

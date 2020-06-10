@@ -4,8 +4,7 @@ using System.Text;
 
 namespace EasyForm.EntityFrameCore.Entities.Config
 {
-    public class BoolFieldDefinitionEntity : BaseFieldDefinitionEntity
+    public class DateTimeFieldEntity : BaseFieldEntity
     {
-        public bool? DefaultValue { get; set; }
     }
 }

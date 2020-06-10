@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EasyForm.EntityFrameCore.Entities.Config
 {
-    public class IntFieldDefinitionEntity : BaseFieldDefinitionEntity
+    public class IntFieldEntity : BaseFieldEntity
     {
         public int? Max { get; set; }
         public int? Min { get; set; }

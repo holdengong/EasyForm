@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EasyForm.EntityFrameCore.Entities.Config
 {
-    public class DateTimeFieldDefinitionEntity : BaseFieldDefinitionEntity
+    public class ObjectFieldEntity : BaseFieldEntity
     {
     }
 }
