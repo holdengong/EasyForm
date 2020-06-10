@@ -2,6 +2,7 @@
 using EasyForm.Core.Interfaces;
 using EasyForm.Core.Models.Definitions;
 using EasyForm.Core.Models.Definitions.Base;
+using EasyForm.Core.UnitTests.Stubs;
 using EasyForm.Core.Validation.Contexts;
 using EasyForm.Core.Validation.Default;
 using FluentAssertions;
@@ -137,7 +138,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 FormId = "test",
                 Fields = new List<FieldDefinition>
                 {
-                    new CascaderFieldDefinition{ FieldName="test" ,Options = new List<OptionWithChild<int>>() }
+                    new CascaderFieldDefinition{ FieldName="test" ,Options = new List<FieldOption>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -169,7 +170,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 FormId = "test",
                 Fields = new List<FieldDefinition>
                 {
-                    new CheckboxFieldDefinition{ FieldName="test" ,Options = new List<Option<int>>() }
+                    new CheckboxFieldDefinition{ FieldName="test" ,Options = new List<FieldOption>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -201,7 +202,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 FormId = "test",
                 Fields = new List<FieldDefinition>
                 {
-                    new MultiSelectFieldDefinition{ FieldName="test" ,Options = new List<Option<int>>() }
+                    new MultiSelectFieldDefinition{ FieldName="test" ,Options = new List<FieldOption>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -233,7 +234,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 FormId = "test",
                 Fields = new List<FieldDefinition>
                 {
-                    new RadioFieldDefinition{ FieldName="test" ,Options = new List<Option<int>>() }
+                    new RadioFieldDefinition{ FieldName="test" ,Options = new List<FieldOption>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -265,7 +266,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 FormId = "test",
                 Fields = new List<FieldDefinition>
                 {
-                    new SelectFieldDefinition{ FieldName="test" ,Options = new List<Option<int>>() }
+                    new SelectFieldDefinition{ FieldName="test" ,Options = new List<FieldOption>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -324,6 +325,23 @@ namespace EasyForm.UnitTests.Validation.Default
             var context = new FormDefinitionValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task Checkbox_options_is_null_and_options_store_provided_should_be_valid()
+        {
+            var form = new FormDefinition
+            {
+                FormId = "test",
+                Fields = new List<FieldDefinition>
+                {
+                    new CheckboxFieldDefinition{ FieldName="test" ,Options = new List<FieldOption>(),
+                     FieldOptionsName = "test", FieldOptionsStore = new FakeFieldOptionsStore()}
+                }
+            };
+            var context = new FormDefinitionValidationContext(form);
+            await validator.ValidateAsync(context);
+            context.IsValid.Should().BeTrue();
         }
     }
 }

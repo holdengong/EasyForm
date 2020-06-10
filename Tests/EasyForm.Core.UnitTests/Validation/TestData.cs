@@ -93,7 +93,7 @@ namespace EasyForm.UnitTests.Validation
         }
 
         public static CascaderFieldDefinition CascaderFieldDefinition=> 
-            new CascaderFieldDefinition { FieldName = "cascader", Options = OptionWithChilds };
+            new CascaderFieldDefinition { FieldName = "cascader", Options = OptionHasChildren };
 
         public static CheckboxFieldDefinition CheckboxFieldDefinition=> 
             new CheckboxFieldDefinition { FieldName = "checkbox", Options = Options };
@@ -140,18 +140,18 @@ namespace EasyForm.UnitTests.Validation
         public static IntFieldDefinition IntFieldDefinition =>
             new IntFieldDefinition { FieldName = "int" };
 
-        private static List<Option<int>> Options
+        private static List<FieldOption> Options
         {
             get
             {
-                return new List<Option<int>>
+                return new List<FieldOption>
             {
-                new Option<int>
+                new FieldOption
                 {
                     Label = "test1",
                     Value=1
                 },
-                new Option<int>
+                new FieldOption
                 {
                     Label = "test2",
                     Value=2
@@ -160,28 +160,28 @@ namespace EasyForm.UnitTests.Validation
             }
         }
 
-        private static List<OptionWithChild<int>> OptionWithChilds
+        private static List<FieldOption> OptionHasChildren
         {
             get
             {
-                return new List<OptionWithChild<int>>
+                return new List<FieldOption>
                 {
-                    new OptionWithChild<int>
+                    new FieldOption
                     {
                         Label = "test1",
                         Value=1,
-                        Children = new List<OptionWithChild<int>>
+                        Children = new List<FieldOption>
                         {
-                            new OptionWithChild<int>{ Label = "test1.1", Value = 12 }
+                            new FieldOption{ Label = "test1.1", Value = 12 }
                         }
                     },
-                    new OptionWithChild<int>
+                    new FieldOption
                     {
                         Label = "test2",
                         Value=2,
-                        Children = new List<OptionWithChild<int>>
+                        Children = new List<FieldOption>
                         {
-                            new OptionWithChild<int>{ Label = "test2.2", Value = 21 }
+                            new FieldOption{ Label = "test2.2", Value = 21 }
                         }
                     }
                 };

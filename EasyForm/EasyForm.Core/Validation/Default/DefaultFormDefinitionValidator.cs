@@ -131,7 +131,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateCheckBoxAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<CheckboxFieldDefinition, int,Option<int>>(context);
+            await ValidateOptionsAsync<CheckboxFieldDefinition>(context);
         }
 
         protected virtual Task ValidateDateBoxAsync(FormDefinitionValidationContext context)
@@ -156,12 +156,12 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateMultiSelectAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<MultiSelectFieldDefinition, int, Option<int>>(context);
+            await ValidateOptionsAsync<MultiSelectFieldDefinition>(context);
         }
 
         protected async virtual Task ValidateRadioAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<RadioFieldDefinition, int,Option<int>>(context);
+            await ValidateOptionsAsync<RadioFieldDefinition>(context);
         }
 
         protected virtual Task ValidateRichTextAsync(FormDefinitionValidationContext context)
@@ -171,7 +171,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateSelectAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<SelectFieldDefinition, int,Option<int>>(context);
+            await ValidateOptionsAsync<SelectFieldDefinition>(context);
         }
 
         protected virtual Task ValidateTextAreaAsync(FormDefinitionValidationContext context)
@@ -186,7 +186,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateCascaderAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<CascaderFieldDefinition, int, OptionWithChild<int>>(context);
+            await ValidateOptionsAsync<CascaderFieldDefinition>(context);
         }
 
         protected virtual Task ValidateColorPickerAsync(FormDefinitionValidationContext context)
@@ -227,13 +227,11 @@ namespace EasyForm.Core.Validation.Default
             return Task.CompletedTask;
         }
 
-        protected virtual Task ValidateOptionsAsync<TComponentType, TOptionValueType,TOptionType>(FormDefinitionValidationContext context)
-            where TComponentType : class,IFieldHasOptions<TOptionValueType,TOptionType>,new()
-            where TOptionValueType : struct
-            where TOptionType : Option<TOptionValueType>
+        protected virtual Task ValidateOptionsAsync<TFieldType>(FormDefinitionValidationContext context)
+            where TFieldType : class, IFieldHasOptions,new()
         {
-            var fields = context.FormDefinition.Fields.Where(_ => _ is TComponentType)
-                ?.Select(_ => _ as TComponentType);
+            var fields = context.FormDefinition.Fields.Where(_ => _ is TFieldType)
+                ?.Select(_ => _ as TFieldType);
 
             if (fields.IsNullOrEmpty()) return Task.CompletedTask;
 
@@ -241,8 +239,16 @@ namespace EasyForm.Core.Validation.Default
             {
                 if (field.Options.IsNullOrEmpty())
                 {
-                    context.SetError("field has no options");
-                    return Task.CompletedTask;
+                    if (field.FieldOptionsName.IsMissing())
+                    {
+                        context.SetError("field options name is required if options is numm or empty.");
+                        return Task.CompletedTask;
+                    }
+                    if (field.FieldOptionsStore == null)
+                    {
+                        context.SetError("field options store is required if options is numm or empty.");
+                        return Task.CompletedTask;
+                    }
                 }
             }
 

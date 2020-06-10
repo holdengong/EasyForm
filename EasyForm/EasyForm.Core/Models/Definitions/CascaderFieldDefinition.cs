@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 namespace EasyForm.Core.Models.Definitions
 {
-    public class CascaderFieldDefinition : ObjectFieldDefinition<OptionWithChild<int>>, IFieldHasOptions<int, OptionWithChild<int>>
+    public class CascaderFieldDefinition : ObjectFieldDefinition<List<int>>, IFieldHasOptions
     {
-        public IEnumerable<OptionWithChild<int>> Options { get; set; }
+        public IEnumerable<FieldOption> Options { get; set; }
+        public string FieldOptionsName { get; set; }
+        public IFieldOptionsStore FieldOptionsStore { get; set; }
     }
 }

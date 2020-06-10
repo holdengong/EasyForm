@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 namespace EasyForm.Core.Models.Definitions
 {
-    public class CheckboxFieldDefinition : ObjectFieldDefinition<int>, IFieldHasOptions<int, Option<int>>
+    public class CheckboxFieldDefinition : ObjectFieldDefinition<List<int>>, IFieldHasOptions
     {
-        public IEnumerable<Option<int>> Options { get; set; }
+        public IEnumerable<FieldOption> Options { get; set; }
+        public string FieldOptionsName { get; set; }
+        public IFieldOptionsStore FieldOptionsStore { get; set; }
     }
 }
