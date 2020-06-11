@@ -2,8 +2,15 @@
 
 namespace EasyForm.Core.Models.Definitions.Base
 {
-    public abstract class BoolFieldDefinition : FieldDefinition
+    public abstract class BoolFieldDefinition : FieldDefinition<bool?>
     {
-        public bool? DefaultValue { get; set; }
+        public BoolFieldDefinition()
+        {
+        }
+
+        public BoolFieldDefinition(string fieldName,string displayName)
+            :base(fieldName,displayName)
+        {
+        }
     }
 }

@@ -1,7 +1,14 @@
 ﻿namespace EasyForm.Core.Models.Definitions.Base
 {
-    public abstract class ObjectFieldDefinition<T> : FieldDefinition
+    public abstract class ObjectFieldDefinition<TObjectType> : FieldDefinition<TObjectType>
     {
-        public virtual T DefaultValue { get; set; }
+        public ObjectFieldDefinition()
+        {
+        }
+
+        public ObjectFieldDefinition(string fieldName, string displayName)
+        : base(fieldName, displayName)
+        {
+        }
     }
 }

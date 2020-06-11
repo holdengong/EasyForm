@@ -4,5 +4,8 @@ namespace EasyForm.Core.Models.Definitions
 {
     public class SwitchFieldDefinition : BoolFieldDefinition
     {
+        public SwitchFieldDefinition()
+        {
+        }
     }
 }

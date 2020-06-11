@@ -6,6 +6,17 @@ namespace EasyForm.Core.Models.Definitions
 {
     public class SelectFieldDefinition : IntFieldDefinition, IFieldHasOptions
     {
+        public SelectFieldDefinition()
+        {
+
+        }
+
+        public SelectFieldDefinition(string fieldName,string displayName)
+            :base(fieldName,displayName)
+        {
+
+        }
+
         public IEnumerable<FieldOption> Options { get; set; }
         public string FieldOptionsName { get; set; }
         public IFieldOptionsStore FieldOptionsStore { get; set; }

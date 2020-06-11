@@ -2,10 +2,19 @@
 
 namespace EasyForm.Core.Models.Definitions.Base
 {
-    public abstract class TextFieldDefinition : FieldDefinition, 
-        IFilterableField
+    public abstract class TextFieldDefinition : FieldDefinition<string>,
+        IFuzzyFilterableField
     {
-        public string DefaultValue { get; set; }
+        public TextFieldDefinition()
+        {
+                
+        }
+
+        public TextFieldDefinition(string fieldName, string displayName)
+     : base(fieldName, displayName)
+        {
+        }
+
         public string Placeholder { get; set; }
         public bool AllowFilter { get; set; }
     }
