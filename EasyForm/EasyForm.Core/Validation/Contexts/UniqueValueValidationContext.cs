@@ -2,7 +2,7 @@
 
 namespace EasyForm.Core.Validation.Contexts
 {
-    public class UniqueFieldValueValidationContext
+    public class UniqueValueValidationContext
     {
         public string FormId { get; set; }
 
@@ -12,7 +12,7 @@ namespace EasyForm.Core.Validation.Contexts
 
         public string ErrorMessage { get; set; }
 
-        public UniqueFieldValueValidationContext(string formId, FieldValue fieldValue)
+        public UniqueValueValidationContext(string formId, FieldValue fieldValue)
         {
             FormId = formId;
             FieldValue = fieldValue;

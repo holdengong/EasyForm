@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Interfaces
 {
-    public interface IFieldRecordUniqueValidator
+    public interface IUniqueValueValidator
     {
-        Task ValidateAsync(UniqueFieldValueValidationContext context);
+        Task ValidateAsync(UniqueValueValidationContext context);
     }
 }

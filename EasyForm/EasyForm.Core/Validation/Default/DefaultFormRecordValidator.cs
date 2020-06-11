@@ -15,9 +15,9 @@ namespace EasyForm.Core.Validation.Default
     public class DefaultFormRecordValidator : IFormRecordValidator
     {
         private readonly EasyFormOptions _easyFormOptions;
-        private readonly IFieldRecordUniqueValidator _fieldRecordUniqueValidator;
+        private readonly IUniqueValueValidator _fieldRecordUniqueValidator;
 
-        public DefaultFormRecordValidator(EasyFormOptions easyFormOptions, IFieldRecordUniqueValidator fieldRecordUniqueValidator)
+        public DefaultFormRecordValidator(EasyFormOptions easyFormOptions, IUniqueValueValidator fieldRecordUniqueValidator)
         {
             _easyFormOptions = easyFormOptions;
             _fieldRecordUniqueValidator = fieldRecordUniqueValidator;
@@ -137,7 +137,7 @@ namespace EasyForm.Core.Validation.Default
 
                 if (fieldDefinition.IsUnique && record.Value.IsPresent())
                 {
-                    var fieldRecordValidationContext = new UniqueFieldValueValidationContext(context.FormId, record);
+                    var fieldRecordValidationContext = new UniqueValueValidationContext(context.FormId, record);
                     await _fieldRecordUniqueValidator.ValidateAsync(fieldRecordValidationContext);
                     if (!fieldRecordValidationContext.IsValid)
                     {
@@ -240,7 +240,7 @@ namespace EasyForm.Core.Validation.Default
 
                 if (fieldDefinition.IsUnique && record.Value.HasValue)
                 {
-                    var fieldRecordValidationContext = new UniqueFieldValueValidationContext(context.FormId, record);
+                    var fieldRecordValidationContext = new UniqueValueValidationContext(context.FormId, record);
                     await _fieldRecordUniqueValidator.ValidateAsync(fieldRecordValidationContext);
                     if (!fieldRecordValidationContext.IsValid)
                     {

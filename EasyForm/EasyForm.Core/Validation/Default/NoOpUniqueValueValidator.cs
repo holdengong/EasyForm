@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Validation.Default
 {
-    public class NoOpFieldRecordUniqueValidator : IFieldRecordUniqueValidator
+    public class NoOpUniqueValueValidator : IUniqueValueValidator
     {
-        public Task ValidateAsync(UniqueFieldValueValidationContext context)
+        public Task ValidateAsync(UniqueValueValidationContext context)
         {
             return Task.CompletedTask;
         }

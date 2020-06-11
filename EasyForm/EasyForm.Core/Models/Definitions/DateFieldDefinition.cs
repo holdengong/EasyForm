@@ -1,6 +1,8 @@
-﻿namespace EasyForm.Core.Models.Definitions
+﻿using EasyForm.Core.Models.Definitions.Base;
+
+namespace EasyForm.Core.Models.Definitions
 {
-    public class DateFieldDefinition : Base.DateTimeFieldDefinition
+    public class DateFieldDefinition : DateTimeFieldDefinition
     {
     }
 }
