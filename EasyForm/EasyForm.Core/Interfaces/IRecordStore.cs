@@ -15,7 +15,7 @@ namespace EasyForm.Core.Interfaces
         /// <param name="formId"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        Task<string> AddAsync(FormRecord record);
+        Task<string> AddAsync(Record record);
 
         /// <summary>
         /// update a record
@@ -37,14 +37,14 @@ namespace EasyForm.Core.Interfaces
         /// </summary>
         /// <param name="recordId"></param>
         /// <returns></returns>
-        Task<FormRecord> GetAsync(string recordId);
+        Task<Record> GetAsync(string recordId);
 
         /// <summary>
         /// get all records of form, caution: might case performance issue
         /// </summary>
         /// <param name="formId"></param>
         /// <returns></returns>
-        Task<IEnumerable<FormRecord>> GetAllAsync(string formId);
+        Task<IEnumerable<Record>> GetAllAsync(string formId);
 
         /// <summary>
         /// get paged records, sort by lastest update time desc by default
@@ -54,7 +54,7 @@ namespace EasyForm.Core.Interfaces
         /// <param name="pageNo"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        Task<IEnumerable<FormRecord>> GetListAsync(string formId, out int total, int pageNo = 1, int pageSize = 10);
+        Task<IEnumerable<Record>> GetListAsync(string formId, out int total, int pageNo = 1, int pageSize = 10);
 
         /// <summary>
         /// get paged records, with sort/filter
@@ -68,7 +68,7 @@ namespace EasyForm.Core.Interfaces
         /// <param name="pageNo"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        Task<IEnumerable<FormRecord>> GetListAsync(string formId, out int total, string filterByFieldName = "", object filterByValue = null, string sortByFieldName = "", bool asc = false, int pageNo = 1, int pageSize = 10);
+        Task<IEnumerable<Record>> GetListAsync(string formId, out int total, string filterByFieldName = "", object filterByValue = null, string sortByFieldName = "", bool asc = false, int pageNo = 1, int pageSize = 10);
 
         /// <summary>
         /// get records count

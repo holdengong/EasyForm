@@ -1,6 +1,6 @@
-﻿using EasyForm.Core.Interfaces;
-using EasyForm.Core.Models.Definitions.Base;
-using EasyForm.Core.Models.Query;
+﻿using EasyForm.Core.Filters;
+using EasyForm.Core.Interfaces;
+using EasyForm.Core.Models.Forms.Base;
 
 namespace EasyForm.Core.Extensions
 {
@@ -15,7 +15,7 @@ namespace EasyForm.Core.Extensions
 
         public static RecordSorter<TFieldDefinition> SortBy<TFieldDefinition>
             (TFieldDefinition fieldDefinition,SortDirection sortDirection)
-             where TFieldDefinition : FieldDefinition, ISortableField
+             where TFieldDefinition : Field, ISortableField
         {
             return new RecordSorter<TFieldDefinition>(fieldDefinition, sortDirection);
         }

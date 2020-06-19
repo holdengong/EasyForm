@@ -1,6 +1,6 @@
 ﻿using EasyForm.Core.Extensions;
 using EasyForm.Core.Interfaces;
-using EasyForm.Core.Models.Definitions;
+using EasyForm.Core.Models.Forms;
 using EasyForm.Core.Validation.Contexts;
 using System;
 using System.Collections.Generic;
@@ -11,13 +11,13 @@ namespace EasyForm.Core.Stores
 {
     public class InMemoryFormStore : IFormStore
     {
-        private static List<FormDefinition> forms;
+        private static List<Form> forms;
         private readonly IFormValidator formValidator;
 
-        public InMemoryFormStore(IEnumerable<FormDefinition> seedForms,
+        public InMemoryFormStore(IEnumerable<Form> seedForms,
             IFormValidator formValidator)
         {
-            if (seedForms.HasDuplicates(_ => _.FormId))
+            if (seedForms.HasDuplicates(_ => _.Key))
             {
                 throw new ArgumentException("Forms must not contain duplicate ids");
             }
@@ -29,14 +29,14 @@ namespace EasyForm.Core.Stores
             this.formValidator = formValidator;
         }
 
-        public async Task AddAsync(FormDefinition form)
+        public async Task AddAsync(Form form)
         {
             if (form == null)
             {
                 throw new ArgumentNullException(nameof(form));
             }
 
-            if (forms.Any(_ => _.FormId == form.FormId))
+            if (forms.Any(_ => _.Key == form.Key))
             {
                 throw new ArgumentException("form id already exist");
             }
@@ -50,14 +50,14 @@ namespace EasyForm.Core.Stores
             forms.Add(form);
         }
 
-        public Task<IEnumerable<FormDefinition>> GetAllAsync()
+        public Task<IEnumerable<Form>> GetAllAsync()
         {
-            return Task.FromResult(forms as IEnumerable<FormDefinition>);
+            return Task.FromResult(forms as IEnumerable<Form>);
         }
 
-        public async Task<FormDefinition> GetByFormIdAsync(string formId)
+        public async Task<Form> GetByFormIdAsync(string formId)
         {
-            var form = forms.SingleOrDefault(_ => _.FormId == formId);
+            var form = forms.SingleOrDefault(_ => _.Key == formId);
             var context = new FormDefinitionValidationContext(form);
             await formValidator.ValidateAsync(context);
             if (!context.IsValid)
@@ -70,7 +70,7 @@ namespace EasyForm.Core.Stores
 
         public Task RemoveByFormIdAsync(string formId)
         {
-            var form = forms.SingleOrDefault(_ => _.FormId == formId);
+            var form = forms.SingleOrDefault(_ => _.Key == formId);
             if (form != null)
             {
                 forms.Remove(form);
@@ -79,9 +79,9 @@ namespace EasyForm.Core.Stores
             return Task.CompletedTask;
         }
 
-        public Task UpdateAsync(FormDefinition form)
+        public Task UpdateAsync(Form form)
         {
-            var match = forms.SingleOrDefault(_ => _.FormId == form.FormId);
+            var match = forms.SingleOrDefault(_ => _.Key == form.Key);
             if (match != null)
             {
                 match.Description = form.Description;

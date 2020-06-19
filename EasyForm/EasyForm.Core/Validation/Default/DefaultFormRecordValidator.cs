@@ -2,7 +2,8 @@
 using EasyForm.Core.Extensions;
 using EasyForm.Core.Interfaces;
 using EasyForm.Core.Models.Definitions;
-using EasyForm.Core.Models.Definitions.Base;
+using EasyForm.Core.Models.Forms;
+using EasyForm.Core.Models.Forms.Base;
 using EasyForm.Core.Models.Records;
 using EasyForm.Core.Models.Records.Base;
 using EasyForm.Core.Validation.Contexts;
@@ -37,9 +38,9 @@ namespace EasyForm.Core.Validation.Default
                 throw new ArgumentNullException(nameof(formRecord));
             }
 
-            if (formRecord.FormDefinitionId.IsMissing())
+            if (formRecord.FormKey.IsMissing())
             {
-                throw new ArgumentNullException(nameof(formRecord.FormDefinitionId));
+                throw new ArgumentNullException(nameof(formRecord.FormKey));
             }
 
             if (formRecord.FieldValues.IsNullOrEmpty())
@@ -128,7 +129,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as TextboxFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as TextboxField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsMissing())
                 {
@@ -158,7 +159,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as CheckboxFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as CheckboxField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
                 {
@@ -175,7 +176,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as DateFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as DateField;
 
                 if (fieldDefinition.IsRequired && !record.Value.HasValue)
                 {
@@ -192,7 +193,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as DateTimeFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as DateTimeField;
 
                 if (fieldDefinition.IsRequired && !record.Value.HasValue)
                 {
@@ -209,7 +210,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as DecimalFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as DecimalField;
 
                 if (fieldDefinition.IsRequired && !record.Value.HasValue)
                 {
@@ -231,7 +232,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as IntFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as IntField;
 
                 if (fieldDefinition.IsRequired && !record.Value.HasValue)
                 {
@@ -261,7 +262,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as MultiSelectFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as MultiSelectField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
                 {
@@ -278,7 +279,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as CheckboxFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as CheckboxField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
                 {
@@ -295,7 +296,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as RichTextFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as RichTextField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
                 {
@@ -312,7 +313,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as SelectFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as SelectField;
 
                 if (fieldDefinition.IsRequired && !record.Value.HasValue)
                 {
@@ -329,7 +330,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as TextAreaFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as TextAreaField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsMissing())
                 {
@@ -346,7 +347,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as TimeFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as TimeField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
                 {
@@ -363,7 +364,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as CascaderFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as CascaderField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
                 {
@@ -380,7 +381,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as ColorPickerFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as ColorPickerField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
                 {
@@ -397,7 +398,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as SliderFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as SliderField;
 
                 if (fieldDefinition.IsRequired && !record.Value.HasValue)
                 {
@@ -419,7 +420,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as SwitchFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as SwitchField;
 
                 if (fieldDefinition.IsRequired && !record.Value.HasValue)
                 {
@@ -436,7 +437,7 @@ namespace EasyForm.Core.Validation.Default
 
             foreach (var record in records)
             {
-                var fieldDefinition = record.FieldDefinition as UploaderFieldDefinition;
+                var fieldDefinition = record.FieldDefinition as UploaderField;
 
                 if (fieldDefinition.IsRequired && record.Value.IsNullOrEmpty())
                 {

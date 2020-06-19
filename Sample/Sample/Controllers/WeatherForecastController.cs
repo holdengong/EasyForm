@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EasyForm.Core.Extensions;
-using EasyForm.Core.Models.Definitions;
-using EasyForm.Core.Models.Definitions.Base;
-using EasyForm.Core.Models.Query;
+﻿using EasyForm.Core.Extensions;
+using EasyForm.Core.Filters;
+using EasyForm.Core.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebApplication1.Controllers
 {
@@ -30,13 +28,13 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var fieldDefinition = new TextboxFieldDefinition("test", "test");
+            var fieldDefinition = new TextboxField("test", "test");
             fieldDefinition.FieldName = "test";
 
             var filter = QueryBuilders.Contains(fieldDefinition, "test");
             var sort = QueryBuilders.SortBy(fieldDefinition, SortDirection.Desc);
 
-            var searchCriteria = new SearchCriteria(1, 10, filter, sort);
+            var searchCriteria = new SearchCondition(1, 10, filter, sort);
 
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

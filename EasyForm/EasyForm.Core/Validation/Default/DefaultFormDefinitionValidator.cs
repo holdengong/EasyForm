@@ -2,6 +2,7 @@
 using EasyForm.Core.Extensions;
 using EasyForm.Core.Interfaces;
 using EasyForm.Core.Models.Definitions;
+using EasyForm.Core.Models.Forms;
 using EasyForm.Core.Validation.Contexts;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace EasyForm.Core.Validation.Default
                 return Task.CompletedTask;
             }
 
-            if (form.FormId.IsMissing())
+            if (form.Key.IsMissing())
             {
                 context.SetError("form id is missing");
                 return Task.CompletedTask;
@@ -131,7 +132,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateCheckBoxAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<CheckboxFieldDefinition>(context);
+            await ValidateOptionsAsync<CheckboxField>(context);
         }
 
         protected virtual Task ValidateDateBoxAsync(FormDefinitionValidationContext context)
@@ -156,12 +157,12 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateMultiSelectAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<MultiSelectFieldDefinition>(context);
+            await ValidateOptionsAsync<MultiSelectField>(context);
         }
 
         protected async virtual Task ValidateRadioAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<RadioFieldDefinition>(context);
+            await ValidateOptionsAsync<RadioField>(context);
         }
 
         protected virtual Task ValidateRichTextAsync(FormDefinitionValidationContext context)
@@ -171,7 +172,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateSelectAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<SelectFieldDefinition>(context);
+            await ValidateOptionsAsync<SelectField>(context);
         }
 
         protected virtual Task ValidateTextAreaAsync(FormDefinitionValidationContext context)
@@ -186,7 +187,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateCascaderAsync(FormDefinitionValidationContext context)
         {
-            await ValidateOptionsAsync<CascaderFieldDefinition>(context);
+            await ValidateOptionsAsync<CascaderField>(context);
         }
 
         protected virtual Task ValidateColorPickerAsync(FormDefinitionValidationContext context)
@@ -206,7 +207,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateUploadAsync(FormDefinitionValidationContext context)
         {
-            var uploads = context.FormDefinition.Fields.Where(_ => _ is UploaderFieldDefinition)?.Select(_ => _ as UploaderFieldDefinition);
+            var uploads = context.FormDefinition.Fields.Where(_ => _ is UploaderField)?.Select(_ => _ as UploaderField);
             if (uploads.IsNullOrEmpty()) return Task.CompletedTask;
 
             foreach (var upload in uploads)

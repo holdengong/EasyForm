@@ -1,4 +1,4 @@
-﻿using EasyForm.EntityFrameCore.Entities.Config;
+﻿using EasyForm.EntityFrameCore.Entities.Records;
 using EasyForm.EntityFrameCore.Interfaces;
 using EasyForm.EntityFrameCore.Options;
 using Microsoft.EntityFrameworkCore;
@@ -24,10 +24,10 @@ namespace EasyForm.EntityFrameCore.Contexts
             this.storeOptions = storeOptions ?? throw new ArgumentNullException(nameof(storeOptions));
         }
 
-        public DbSet<FormRecordEntity> FormRecords { get; set; }
-        public DbSet<BoolFieldValueEntity> BoolFieldValues { get; set; }
-        public DbSet<DateTimeFieldValueEntity> DateTimeFieldValues { get; set; }
-        public DbSet<DecimalFieldValueEntity> DecimalFieldValues { get; set; }
+        public DbSet<Record> FormRecords { get; set; }
+        public DbSet<BoolFieldValue> BoolFieldValues { get; set; }
+        public DbSet<DateTimeFieldValue> DateTimeFieldValues { get; set; }
+        public DbSet<DecimalFieldValue> DecimalFieldValues { get; set; }
         public DbSet<IntFieldValueEntity> IntFieldValues { get; set; }
         public DbSet<ObjectFieldValueEntity> ObjectFieldValues { get; set; }
 
@@ -43,7 +43,7 @@ namespace EasyForm.EntityFrameCore.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FormRecordEntity>(form =>
+            modelBuilder.Entity<Record>(form =>
             {
                 form.ToTable("record");
                 form.HasKey(x => x.Id);
@@ -60,19 +60,19 @@ namespace EasyForm.EntityFrameCore.Contexts
                 form.HasMany(x => x.ObjectFieldValues).WithOne(x => x.Record).HasForeignKey(x => x.RecordId).IsRequired().OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity<BoolFieldValueEntity>(entity =>
+            modelBuilder.Entity<BoolFieldValue>(entity =>
             {
                 entity.ToTable("bool_value");
                 entity.Property(x => x.FieldName).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<DateTimeFieldValueEntity>(entity =>
+            modelBuilder.Entity<DateTimeFieldValue>(entity =>
             {
                 entity.ToTable("datetime_value");
                 entity.Property(x => x.FieldName).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<DecimalFieldValueEntity>(entity =>
+            modelBuilder.Entity<DecimalFieldValue>(entity =>
             {
                 entity.ToTable("decimal_value");
                 entity.Property(x => x.FieldName).HasMaxLength(200);

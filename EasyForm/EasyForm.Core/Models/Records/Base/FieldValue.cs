@@ -1,21 +1,21 @@
-﻿using EasyForm.Core.Models.Definitions.Base;
+﻿using EasyForm.Core.Models.Forms.Base;
 using System;
 
 namespace EasyForm.Core.Models.Records.Base
 {
     public abstract class FieldValue
     {
-        public FieldDefinition FieldDefinition { get; set; }
+        public Field FieldDefinition { get; set; }
 
         public override bool Equals(object obj)
         {
             var that = (FieldValue)obj;
-            return this.FieldDefinition.FieldName.Equals(that.FieldDefinition.FieldName, StringComparison.CurrentCultureIgnoreCase);
+            return FieldDefinition.FieldName.Equals(that.FieldDefinition.FieldName, StringComparison.CurrentCultureIgnoreCase);
         }
 
         public override int GetHashCode()
         {
-            return this.FieldDefinition.FieldName.GetHashCode();
+            return FieldDefinition.FieldName.GetHashCode();
         }
     }
 

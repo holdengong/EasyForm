@@ -1,6 +1,6 @@
 ﻿using EasyForm.Core.Configuration;
 using EasyForm.Core.Interfaces;
-using EasyForm.Core.Models.Definitions;
+using EasyForm.Core.Models.Forms;
 using EasyForm.Core.Stores;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,7 +16,7 @@ namespace EasyForm.Core
             return new EasyFormBuilder(services);
         }
 
-        public static IEasyFormBuilder AddInMemoryFormDefinitions(this IEasyFormBuilder builder,IEnumerable<FormDefinition> forms)
+        public static IEasyFormBuilder AddInMemoryFormDefinitions(this IEasyFormBuilder builder,IEnumerable<Form> forms)
         {
             builder.Services.AddSingleton(forms);
 

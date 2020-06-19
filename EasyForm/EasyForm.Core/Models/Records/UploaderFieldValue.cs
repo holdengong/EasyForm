@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EasyForm.Core.Models.Records
 {
-    public class UploaderFieldValue : ObjectFieldValue<IEnumerable<FileModel>>
+    public class UploaderFieldValue : ObjectFieldValue<IEnumerable<File>>
     {
     }
 }

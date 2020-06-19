@@ -1,4 +1,4 @@
-﻿using EasyForm.EntityFrameCore.Entities.Config;
+﻿using EasyForm.EntityFrameCore.Entities.Forms;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,13 +9,13 @@ namespace EasyForm.EntityFrameCore.Interfaces
 {
     public interface IFormConfigDbContext : IDisposable
     {
-        DbSet<FormEntity> Forms { get; set; }
-        DbSet<BoolFieldEntity> BoolFields { get; set; }
-        DbSet<DateTimeFieldEntity> DateTimeFields { get; set; }
-        DbSet<DecimalFieldEntity> DecimalFields { get; set; }
-        DbSet<IntFieldEntity> IntFields { get; set; }
-        DbSet<ObjectFieldEntity> ObjectFields { get; set; }
-        DbSet<OptionEntity> Options { get; set; }
+        DbSet<Form> Forms { get; set; }
+        DbSet<BoolField> BoolFields { get; set; }
+        DbSet<DateTimeField> DateTimeFields { get; set; }
+        DbSet<DecimalField> DecimalFields { get; set; }
+        DbSet<IntField> IntFields { get; set; }
+        DbSet<ObjectField> ObjectFields { get; set; }
+        DbSet<Option> Options { get; set; }
         int SaveChanges();
         Task<int> SaveChangesAsync();
     }

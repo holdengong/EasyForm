@@ -1,16 +1,16 @@
-﻿using EasyForm.Core.Models.Definitions;
+﻿using EasyForm.Core.Models.Forms;
 
 namespace EasyForm.Core.Validation.Contexts
 {
     public class FormDefinitionValidationContext
     {
-        public FormDefinition FormDefinition { get; }
+        public Form FormDefinition { get; }
 
         public bool IsValid { get; set; } = true;
 
         public string ErrorMessage { get; set; }
 
-        public FormDefinitionValidationContext(FormDefinition formDefinition)
+        public FormDefinitionValidationContext(Form formDefinition)
         {
             FormDefinition = formDefinition;
         }

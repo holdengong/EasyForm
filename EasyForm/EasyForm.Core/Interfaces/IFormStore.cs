@@ -1,4 +1,4 @@
-﻿using EasyForm.Core.Models.Definitions;
+﻿using EasyForm.Core.Models.Forms;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,21 +11,21 @@ namespace EasyForm.Core.Interfaces
         /// </summary>
         /// <param name="formId"></param>
         /// <returns></returns>
-        Task<FormDefinition> GetByFormIdAsync(string formId);
+        Task<Form> GetByFormIdAsync(string formId);
 
         /// <summary>
         /// add form.
         /// </summary>
         /// <param name="form"></param>
         /// <returns></returns>
-        Task AddAsync(FormDefinition form);
+        Task AddAsync(Form form);
 
         /// <summary>
         /// update form.
         /// </summary>
         /// <param name="form"></param>
         /// <returns></returns>
-        Task UpdateAsync(FormDefinition form);
+        Task UpdateAsync(Form form);
 
         /// <summary>
         /// remove form by form id.
@@ -38,6 +38,6 @@ namespace EasyForm.Core.Interfaces
         /// get all form definitions.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<FormDefinition>> GetAllAsync();
+        Task<IEnumerable<Form>> GetAllAsync();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EasyForm.Core.Models;
 using EasyForm.Core.Models.Definitions;
-using EasyForm.Core.Models.Definitions.Base;
+using EasyForm.Core.Models.Forms;
+using EasyForm.Core.Models.Forms.Base;
 using EasyForm.Core.Models.Records;
 using EasyForm.Core.Models.Records.Base;
 using System;
@@ -10,23 +11,23 @@ namespace EasyForm.UnitTests.Validation
 {
     public static class TestData
     {
-        public static IEnumerable<FormDefinition> FormDefinitions
+        public static IEnumerable<Form> FormDefinitions
         {
             get
             {
-                return new List<FormDefinition> { FormDefinition };
+                return new List<Form> { FormDefinition };
             }
         }
 
-        public static FormDefinition FormDefinition
+        public static Form FormDefinition
         {
             get
             {
-                return new FormDefinition
+                return new Form
                 {
-                    FormId = "test",
+                    Key = "test",
                     Description = "test",
-                    Fields = new List<FieldDefinition>
+                    Fields = new List<Field>
                     {
                         CascaderFieldDefinition,
                         CheckboxFieldDefinition,
@@ -47,13 +48,13 @@ namespace EasyForm.UnitTests.Validation
             }
         }
 
-        public static FormRecord FormRecord
+        public static Record FormRecord
         {
             get
             {
-                return new FormRecord
+                return new Record
                 {
-                    FormDefinitionId = "test",
+                    FormKey = "test",
                     FieldValues = new List<FieldValue>
                     {
                         new CascaderFieldValue { FieldDefinition = CascaderFieldDefinition, Value = new List<int>{1 }},
@@ -72,9 +73,9 @@ namespace EasyForm.UnitTests.Validation
                         new UploaderFieldValue
                         {
                             FieldDefinition = UploaderFieldDefinition, Value =
-                            new List<FileModel>
+                            new List<File>
                             {
-                                new FileModel{ Id = "test" }
+                                new File{ Id = "test" }
                             }
                         },
                         new DecimalFieldValue{  FieldDefinition = DecimalFieldDefinition, Value = 1.1234M },
@@ -84,61 +85,61 @@ namespace EasyForm.UnitTests.Validation
             }
         }
 
-        public static IEnumerable<FormRecord> FormRecords
+        public static IEnumerable<Record> FormRecords
         {
             get
             {
-                return new List<FormRecord> { FormRecord };
+                return new List<Record> { FormRecord };
             }
         }
 
-        public static CascaderFieldDefinition CascaderFieldDefinition=> 
-            new CascaderFieldDefinition { FieldName = "cascader", Options = OptionHasChildren };
+        public static CascaderField CascaderFieldDefinition=> 
+            new CascaderField { FieldName = "cascader", Options = OptionHasChildren };
 
-        public static CheckboxFieldDefinition CheckboxFieldDefinition=> 
-            new CheckboxFieldDefinition { FieldName = "checkbox", Options = Options };
+        public static CheckboxField CheckboxFieldDefinition=> 
+            new CheckboxField { FieldName = "checkbox", Options = Options };
 
-        public static ColorPickerFieldDefinition ColorPickerFieldDefinition =>
-            new ColorPickerFieldDefinition { FieldName = "colorpicker" };
+        public static ColorPickerField ColorPickerFieldDefinition =>
+            new ColorPickerField { FieldName = "colorpicker" };
 
-        public static DateFieldDefinition DateFieldDefinition =>
-            new DateFieldDefinition { FieldName = "date" };
+        public static DateField DateFieldDefinition =>
+            new DateField { FieldName = "date" };
 
-        public static MultiSelectFieldDefinition MultiSelectFieldDefinition =>
-            new MultiSelectFieldDefinition { FieldName = "multiselect", Options = Options };
+        public static MultiSelectField MultiSelectFieldDefinition =>
+            new MultiSelectField { FieldName = "multiselect", Options = Options };
 
-        public static RadioFieldDefinition RadioFieldDefinition =>
-            new RadioFieldDefinition { FieldName = "radio", Options = Options };
+        public static RadioField RadioFieldDefinition =>
+            new RadioField { FieldName = "radio", Options = Options };
 
-        public static RichTextFieldDefinition RichTextFieldDefinition=>
-            new RichTextFieldDefinition { FieldName = "richtext" };
+        public static RichTextField RichTextFieldDefinition=>
+            new RichTextField { FieldName = "richtext" };
 
-        public static SelectFieldDefinition SelectFieldDefinition=>
-            new SelectFieldDefinition { FieldName = "select", Options = Options };
+        public static SelectField SelectFieldDefinition=>
+            new SelectField { FieldName = "select", Options = Options };
 
-        public static SliderFieldDefinition SliderFieldDefinition=>
-            new SliderFieldDefinition { FieldName = "slider" };
+        public static SliderField SliderFieldDefinition=>
+            new SliderField { FieldName = "slider" };
 
-        public static SwitchFieldDefinition SwitchFieldDefinition=>
-            new SwitchFieldDefinition { FieldName = "switch" };
+        public static SwitchField SwitchFieldDefinition=>
+            new SwitchField { FieldName = "switch" };
 
-        public static TextAreaFieldDefinition TextAreaFieldDefinition=>
-            new TextAreaFieldDefinition { FieldName = "textare" };
+        public static TextAreaField TextAreaFieldDefinition=>
+            new TextAreaField { FieldName = "textare" };
 
-        public static TextboxFieldDefinition TextboxFieldDefinition=>
-            new TextboxFieldDefinition { FieldName = "textbox" };
+        public static TextboxField TextboxFieldDefinition=>
+            new TextboxField { FieldName = "textbox" };
 
-        public static TimeFieldDefinition TimeFieldDefinition=>
-            new TimeFieldDefinition { FieldName = "time" };
+        public static TimeField TimeFieldDefinition=>
+            new TimeField { FieldName = "time" };
 
-        public static UploaderFieldDefinition UploaderFieldDefinition=>
-            new UploaderFieldDefinition { FieldName = "uploader", AllowFileTypes = new List<string> { "jpg" } };
+        public static UploaderField UploaderFieldDefinition=>
+            new UploaderField { FieldName = "uploader", AllowFileTypes = new List<string> { "jpg" } };
 
-        public static DecimalFieldDefinition DecimalFieldDefinition =>
-            new DecimalFieldDefinition { FieldName = "decimal" };
+        public static DecimalField DecimalFieldDefinition =>
+            new DecimalField { FieldName = "decimal" };
 
-        public static IntFieldDefinition IntFieldDefinition =>
-            new IntFieldDefinition { FieldName = "int" };
+        public static IntField IntFieldDefinition =>
+            new IntField { FieldName = "int" };
 
         private static List<FieldOption> Options
         {
