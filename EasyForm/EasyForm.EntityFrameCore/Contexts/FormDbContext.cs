@@ -30,6 +30,7 @@ namespace EasyForm.EntityFrameCore.Contexts
         public DbSet<DecimalFieldEntity> DecimalFields { get; set; }
         public DbSet<IntFieldEntity> IntFields { get; set; }
         public DbSet<ObjectFieldEntity> ObjectFields { get; set; }
+        public DbSet<OptionEntity> Options { get; set; }
 
         public Task<int> SaveChangesAsync()
         {
@@ -104,6 +105,15 @@ namespace EasyForm.EntityFrameCore.Contexts
                 entity.ToTable("object_field");
                 entity.Property(x => x.Description).HasMaxLength(200);
                 entity.Property(x => x.FieldName).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<OptionEntity>(entity=> 
+            {
+                entity.ToTable("options");
+                entity.Property(x => x.Label).HasMaxLength(200);
+                entity.Property(x=>x.Purpose).HasMaxLength(50);
+
+                entity.HasIndex(x => x.Purpose);
             });
 
             base.OnModelCreating(modelBuilder);

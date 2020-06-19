@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Interfaces
 {
-    public interface IFormRecordStore
+    public interface IRecordStore
     {
         /// <summary>
         /// add a record

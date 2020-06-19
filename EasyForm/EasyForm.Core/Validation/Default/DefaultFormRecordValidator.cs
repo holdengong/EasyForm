@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Validation.Default
 {
-    public class DefaultFormRecordValidator : IFormRecordValidator
+    public class DefaultFormRecordValidator : IRecordValidator
     {
         private readonly EasyFormOptions _easyFormOptions;
         private readonly IUniqueValueValidator _fieldRecordUniqueValidator;

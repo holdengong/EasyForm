@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Interfaces
 {
-    public interface IFormDefinitionStore
+    public interface IFormStore
     {
         /// <summary>
         /// get form by form id.

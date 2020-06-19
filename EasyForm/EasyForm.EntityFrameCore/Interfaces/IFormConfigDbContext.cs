@@ -15,6 +15,7 @@ namespace EasyForm.EntityFrameCore.Interfaces
         DbSet<DecimalFieldEntity> DecimalFields { get; set; }
         DbSet<IntFieldEntity> IntFields { get; set; }
         DbSet<ObjectFieldEntity> ObjectFields { get; set; }
+        DbSet<OptionEntity> Options { get; set; }
         int SaveChanges();
         Task<int> SaveChangesAsync();
     }

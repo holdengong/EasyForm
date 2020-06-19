@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Interfaces
 {
-    public interface IFormDefinitionValidator
+    public interface IRecordValidator
     {
         /// <summary>
-        /// Determines whether the configuration of a form is valid.
+        /// Determines whether the record of a form is valid.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <returns></returns>
-        Task ValidateAsync(FormDefinitionValidationContext context);
+        Task ValidateAsync(FormRecordValidationContext context);
     }
 }

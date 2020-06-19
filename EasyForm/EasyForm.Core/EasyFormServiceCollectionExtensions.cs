@@ -20,7 +20,7 @@ namespace EasyForm.Core
         {
             builder.Services.AddSingleton(forms);
 
-            builder.Services.AddTransient<IFormDefinitionStore, InMemoryFormStore>();
+            builder.Services.AddTransient<IFormStore, InMemoryFormStore>();
 
             return builder;
         }

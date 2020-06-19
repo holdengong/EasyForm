@@ -13,7 +13,7 @@ namespace EasyForm.UnitTests.Stores
 {
     public class InMemoryFormStoreTests
     {
-        private readonly IFormDefinitionValidator formValidator;
+        private readonly IFormValidator formValidator;
         private readonly EasyFormOptions easyFormOptions;
         public InMemoryFormStoreTests()
         {

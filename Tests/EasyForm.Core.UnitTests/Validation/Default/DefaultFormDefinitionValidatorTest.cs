@@ -15,7 +15,7 @@ namespace EasyForm.UnitTests.Validation.Default
 {
     public class DefaultFormDefinitionValidatorTest
     {
-        private readonly IFormDefinitionValidator validator;
+        private readonly IFormValidator validator;
         private readonly EasyFormOptions options;
         public DefaultFormDefinitionValidatorTest()
         {

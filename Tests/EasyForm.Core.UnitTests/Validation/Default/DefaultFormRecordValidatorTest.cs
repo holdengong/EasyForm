@@ -17,7 +17,7 @@ namespace EasyForm.UnitTests.Validation.Default
 {
     public class DefaultFormRecordValidatorTest
     {
-        private readonly IFormRecordValidator validator;
+        private readonly IRecordValidator validator;
         private readonly IUniqueValueValidator fieldRecordUniqueValidator;
         private readonly EasyFormOptions options;
         public DefaultFormRecordValidatorTest()

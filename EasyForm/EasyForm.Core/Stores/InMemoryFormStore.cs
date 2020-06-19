@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Stores
 {
-    public class InMemoryFormStore : IFormDefinitionStore
+    public class InMemoryFormStore : IFormStore
     {
         private static List<FormDefinition> forms;
-        private readonly IFormDefinitionValidator formValidator;
+        private readonly IFormValidator formValidator;
 
         public InMemoryFormStore(IEnumerable<FormDefinition> seedForms,
-            IFormDefinitionValidator formValidator)
+            IFormValidator formValidator)
         {
             if (seedForms.HasDuplicates(_ => _.FormId))
             {

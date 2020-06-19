@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.Validation.Default
 {
-    public class DefaultFormDefinitionValidator : IFormDefinitionValidator
+    public class DefaultFormDefinitionValidator : IFormValidator
     {
         private readonly EasyFormOptions _easyFormOptions;
 
@@ -228,7 +228,7 @@ namespace EasyForm.Core.Validation.Default
         }
 
         protected virtual Task ValidateOptionsAsync<TFieldType>(FormDefinitionValidationContext context)
-            where TFieldType : class, IFieldHasOptions,new()
+            where TFieldType : class, IHasOptions,new()
         {
             var fields = context.FormDefinition.Fields.Where(_ => _ is TFieldType)
                 ?.Select(_ => _ as TFieldType);

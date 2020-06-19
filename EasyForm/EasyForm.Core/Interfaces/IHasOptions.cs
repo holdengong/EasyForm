@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EasyForm.Core.Interfaces
 {
-    public interface IFieldHasOptions
+    public interface IHasOptions
     {
         /// <summary>
         /// provide field options directly.
@@ -22,6 +22,6 @@ namespace EasyForm.Core.Interfaces
         /// get options from a store at runtime, required if options is null.
         /// </summary>
         /// </summary>
-        IFieldOptionsStore OptionsStore { get; set; }
+        IOptionsStore OptionsStore { get; set; }
     }
 }

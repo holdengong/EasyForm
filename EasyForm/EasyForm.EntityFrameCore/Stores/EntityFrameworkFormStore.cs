@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EasyForm.EntityFrameCore.Stores
 {
-    public class EntityFrameworkFormStore : IFormDefinitionStore
+    public class EntityFrameworkFormStore : IFormStore
     {
         public Task AddAsync(FormDefinition form)
         {

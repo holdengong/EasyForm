@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.UnitTests.Stubs
 {
-    public class FakeFieldOptionsStore : IFieldOptionsStore
+    public class FakeFieldOptionsStore : IOptionsStore
     {
         public Task AddAsync(string name, IEnumerable<FieldOption> options)
         {

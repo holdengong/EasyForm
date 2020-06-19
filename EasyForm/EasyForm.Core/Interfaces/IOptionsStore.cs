@@ -7,7 +7,7 @@ namespace EasyForm.Core.Interfaces
     /// <summary>
     /// store for getting field options at runtime.
     /// </summary>
-    public interface IFieldOptionsStore
+    public interface IOptionsStore
     {
         /// <summary>
         /// get field options by name.
