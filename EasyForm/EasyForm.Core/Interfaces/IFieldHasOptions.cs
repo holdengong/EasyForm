@@ -15,13 +15,13 @@ namespace EasyForm.Core.Interfaces
         /// <summary>
         /// get options from a store at runtime, required if options is null.
         /// </summary>
-        string FieldOptionsName { get; set; }
+        string OptionsProvider { get; set; }
 
         /// <summary>
         ///  /// <summary>
         /// get options from a store at runtime, required if options is null.
         /// </summary>
         /// </summary>
-        IFieldOptionsStore FieldOptionsStore { get; set; }
+        IFieldOptionsStore OptionsStore { get; set; }
     }
 }

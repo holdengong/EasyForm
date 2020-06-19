@@ -16,7 +16,7 @@ namespace EasyForm.Core.Models.Definitions
         {
         }
         public IEnumerable<FieldOption> Options { get; set; }
-        public string FieldOptionsName { get; set; }
-        public IFieldOptionsStore FieldOptionsStore { get; set; }
+        public string OptionsProvider { get; set; }
+        public IFieldOptionsStore OptionsStore { get; set; }
     }
 }

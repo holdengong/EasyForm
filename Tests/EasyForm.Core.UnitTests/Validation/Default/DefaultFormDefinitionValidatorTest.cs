@@ -336,7 +336,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Fields = new List<FieldDefinition>
                 {
                     new CheckboxFieldDefinition{ FieldName="test" ,Options = new List<FieldOption>(),
-                     FieldOptionsName = "test", FieldOptionsStore = new FakeFieldOptionsStore()}
+                     OptionsProvider = "test", OptionsStore = new FakeFieldOptionsStore()}
                 }
             };
             var context = new FormDefinitionValidationContext(form);

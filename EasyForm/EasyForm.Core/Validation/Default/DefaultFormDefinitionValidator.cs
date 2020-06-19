@@ -239,12 +239,12 @@ namespace EasyForm.Core.Validation.Default
             {
                 if (field.Options.IsNullOrEmpty())
                 {
-                    if (field.FieldOptionsName.IsMissing())
+                    if (field.OptionsProvider.IsMissing())
                     {
                         context.SetError("field options name is required if options is numm or empty.");
                         return Task.CompletedTask;
                     }
-                    if (field.FieldOptionsStore == null)
+                    if (field.OptionsStore == null)
                     {
                         context.SetError("field options store is required if options is numm or empty.");
                         return Task.CompletedTask;
