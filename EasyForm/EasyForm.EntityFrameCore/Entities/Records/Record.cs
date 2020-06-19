@@ -6,14 +6,14 @@ namespace EasyForm.EntityFrameCore.Entities.Records
 {
     public class Record : BaseEntity
     {
-        public int FormId { get; set; }
-        public Form Form { get; set; }
+        public string FormKey { get; set; }
+        public string Key { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime? Updated { get; set; }
-        public List<BoolFieldValue> BoolFieldValues { get; set; }
-        public List<DateTimeFieldValue> DateTimeFieldValues { get; set; }
-        public List<DecimalFieldValue> DecimalFieldValues { get; set; }
-        public List<IntFieldValueEntity> IntFieldValues { get; set; }
-        public List<ObjectFieldValueEntity> ObjectFieldValues { get; set; }
+        public IEnumerable<BoolFieldValue> BoolFieldValues { get; set; }
+        public IEnumerable<DateTimeFieldValue> DateTimeFieldValues { get; set; }
+        public IEnumerable<DecimalFieldValue> DecimalFieldValues { get; set; }
+        public IEnumerable<IntFieldValue> IntFieldValues { get; set; }
+        public IEnumerable<ObjectFieldValue> ObjectFieldValues { get; set; }
     }
 }

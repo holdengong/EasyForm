@@ -15,7 +15,7 @@ namespace EasyForm.EntityFrameCore.Contexts
         }
     }
 
-    public class EasyFormConfigDbContext<TContext> : DbContext, IFormConfigDbContext
+    public class EasyFormConfigDbContext<TContext> : DbContext, IFormDbContext
     {
         private readonly FormStoreOptions storeOptions;
         public EasyFormConfigDbContext(DbContextOptions options, FormStoreOptions storeOptions)

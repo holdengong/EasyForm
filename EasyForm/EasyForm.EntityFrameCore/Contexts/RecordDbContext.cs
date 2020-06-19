@@ -15,7 +15,7 @@ namespace EasyForm.EntityFrameCore.Contexts
         }
     }
 
-    public class RecordDbContext<TContext> : DbContext, IFormRecordDbContext
+    public class RecordDbContext<TContext> : DbContext, IRecordDbContext
     {
         private readonly FormStoreOptions storeOptions;
         public RecordDbContext(DbContextOptions options, FormStoreOptions storeOptions)
@@ -28,8 +28,8 @@ namespace EasyForm.EntityFrameCore.Contexts
         public DbSet<BoolFieldValue> BoolFieldValues { get; set; }
         public DbSet<DateTimeFieldValue> DateTimeFieldValues { get; set; }
         public DbSet<DecimalFieldValue> DecimalFieldValues { get; set; }
-        public DbSet<IntFieldValueEntity> IntFieldValues { get; set; }
-        public DbSet<ObjectFieldValueEntity> ObjectFieldValues { get; set; }
+        public DbSet<IntFieldValue> IntFieldValues { get; set; }
+        public DbSet<ObjectFieldValue> ObjectFieldValues { get; set; }
 
         public Task<int> SaveChangesAsync()
         {
@@ -47,12 +47,10 @@ namespace EasyForm.EntityFrameCore.Contexts
             {
                 form.ToTable("record");
                 form.HasKey(x => x.Id);
+                form.HasIndex(x => x.Key).IsUnique();
 
-                form.Property(x => x.Created)
-                .IsRequired();
-
+                form.Property(x => x.Created).IsRequired();
                 form.Property(x => x.Updated);
-
                 form.HasMany(x => x.BoolFieldValues).WithOne(x => x.Record).HasForeignKey(x => x.RecordId).IsRequired().OnDelete(DeleteBehavior.Cascade);
                 form.HasMany(x => x.DateTimeFieldValues).WithOne(x => x.Record).HasForeignKey(x => x.RecordId).IsRequired().OnDelete(DeleteBehavior.Cascade);
                 form.HasMany(x => x.DecimalFieldValues).WithOne(x => x.Record).HasForeignKey(x => x.RecordId).IsRequired().OnDelete(DeleteBehavior.Cascade);
@@ -78,13 +76,13 @@ namespace EasyForm.EntityFrameCore.Contexts
                 entity.Property(x => x.FieldName).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<IntFieldValueEntity>(entity =>
+            modelBuilder.Entity<IntFieldValue>(entity =>
             {
                 entity.ToTable("int_value");
                 entity.Property(x => x.FieldName).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<ObjectFieldValueEntity>(entity =>
+            modelBuilder.Entity<ObjectFieldValue>(entity =>
             {
                 entity.ToTable("object_value");
                 entity.Property(x => x.FieldName).HasMaxLength(200);

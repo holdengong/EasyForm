@@ -4,7 +4,8 @@ using System.Text;
 
 namespace EasyForm.EntityFrameCore.Entities.Records
 {
-    public class IntFieldValueEntity : BaseFieldValue<int?>
+    public class IntFieldValue : BaseFieldValue
     {
+        public int? Value { get; set; }
     }
 }

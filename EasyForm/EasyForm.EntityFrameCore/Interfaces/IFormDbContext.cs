@@ -1,13 +1,11 @@
 ﻿using EasyForm.EntityFrameCore.Entities.Forms;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EasyForm.EntityFrameCore.Interfaces
 {
-    public interface IFormConfigDbContext : IDisposable
+    public interface IFormDbContext : IDisposable
     {
         DbSet<Form> Forms { get; set; }
         DbSet<BoolField> BoolFields { get; set; }

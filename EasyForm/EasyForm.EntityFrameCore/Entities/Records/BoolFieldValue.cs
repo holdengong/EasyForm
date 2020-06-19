@@ -4,7 +4,8 @@ using System.Text;
 
 namespace EasyForm.EntityFrameCore.Entities.Records
 {
-    public class BoolFieldValue : BaseFieldValue<bool?>
+    public class BoolFieldValue : BaseFieldValue
     {
+        public bool? Value { get; set; }
     }
 }

@@ -21,6 +21,6 @@ namespace EasyForm.Core.Models.Records.Base
 
     public abstract class FieldValue<T> : FieldValue
     {
-        public T Value { get; set; }
+        public virtual T Value { get; set; }
     }
 }

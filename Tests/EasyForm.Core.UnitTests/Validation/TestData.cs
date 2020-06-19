@@ -55,7 +55,7 @@ namespace EasyForm.UnitTests.Validation
                 return new Record
                 {
                     FormKey = "test",
-                    FieldValues = new List<FieldValue>
+                    Values = new List<FieldValue>
                     {
                         new CascaderFieldValue { FieldDefinition = CascaderFieldDefinition, Value = new List<int>{1 }},
                         new CheckboxFieldValue { FieldDefinition = CheckboxFieldDefinition, Value = new List<int>{ 1} },

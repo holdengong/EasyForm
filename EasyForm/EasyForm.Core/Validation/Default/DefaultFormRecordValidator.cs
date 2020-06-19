@@ -43,16 +43,16 @@ namespace EasyForm.Core.Validation.Default
                 throw new ArgumentNullException(nameof(formRecord.FormKey));
             }
 
-            if (formRecord.FieldValues.IsNullOrEmpty())
+            if (formRecord.Values.IsNullOrEmpty())
             {
-                throw new ArgumentNullException(nameof(formRecord.FieldValues));
+                throw new ArgumentNullException(nameof(formRecord.Values));
             }
 
-            var fieldValues = formRecord.FieldValues;
+            var fieldValues = formRecord.Values;
 
             if (fieldValues.IsNullOrEmpty())
             {
-                throw new ArgumentNullException(nameof(context.FormRecord.FieldValues));
+                throw new ArgumentNullException(nameof(context.FormRecord.Values));
             }
 
             if (fieldValues.Any(_ => _.FieldDefinition == null))
@@ -125,7 +125,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateTextboxFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is TextboxFieldValue).Select(_ => _ as TextboxFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is TextboxFieldValue).Select(_ => _ as TextboxFieldValue);
 
             foreach (var record in records)
             {
@@ -155,7 +155,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateCheckboxFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is CheckboxFieldValue).Select(_ => _ as CheckboxFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is CheckboxFieldValue).Select(_ => _ as CheckboxFieldValue);
 
             foreach (var record in records)
             {
@@ -172,7 +172,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateDateFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is DateFieldValue).Select(_ => _ as DateFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is DateFieldValue).Select(_ => _ as DateFieldValue);
 
             foreach (var record in records)
             {
@@ -189,7 +189,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateDateTimeFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is DateTimeFieldValue).Select(_ => _ as DateTimeFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is DateTimeFieldValue).Select(_ => _ as DateTimeFieldValue);
 
             foreach (var record in records)
             {
@@ -206,7 +206,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateDecimalFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is DecimalFieldValue).Select(_ => _ as DecimalFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is DecimalFieldValue).Select(_ => _ as DecimalFieldValue);
 
             foreach (var record in records)
             {
@@ -228,7 +228,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected async virtual Task ValidateIntFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is IntFieldValue).Select(_ => _ as IntFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is IntFieldValue).Select(_ => _ as IntFieldValue);
 
             foreach (var record in records)
             {
@@ -258,7 +258,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateMultiSelectFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is MultiSelectFieldValue).Select(_ => _ as MultiSelectFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is MultiSelectFieldValue).Select(_ => _ as MultiSelectFieldValue);
 
             foreach (var record in records)
             {
@@ -275,7 +275,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateRadioFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is CheckboxFieldValue).Select(_ => _ as CheckboxFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is CheckboxFieldValue).Select(_ => _ as CheckboxFieldValue);
 
             foreach (var record in records)
             {
@@ -292,7 +292,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateRichTextFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is RichTextFieldValue).Select(_ => _ as RichTextFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is RichTextFieldValue).Select(_ => _ as RichTextFieldValue);
 
             foreach (var record in records)
             {
@@ -309,7 +309,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateSelectFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is SelectFieldValue).Select(_ => _ as SelectFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is SelectFieldValue).Select(_ => _ as SelectFieldValue);
 
             foreach (var record in records)
             {
@@ -326,7 +326,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateTextAreaFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is TextAreaFieldValue).Select(_ => _ as TextAreaFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is TextAreaFieldValue).Select(_ => _ as TextAreaFieldValue);
 
             foreach (var record in records)
             {
@@ -343,7 +343,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateTimeFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is TimeFieldValue).Select(_ => _ as TimeFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is TimeFieldValue).Select(_ => _ as TimeFieldValue);
 
             foreach (var record in records)
             {
@@ -360,7 +360,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateCascaderFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is CascaderFieldValue).Select(_ => _ as CascaderFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is CascaderFieldValue).Select(_ => _ as CascaderFieldValue);
 
             foreach (var record in records)
             {
@@ -377,7 +377,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateColorPickerFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is ColorPickerFieldValue).Select(_ => _ as ColorPickerFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is ColorPickerFieldValue).Select(_ => _ as ColorPickerFieldValue);
 
             foreach (var record in records)
             {
@@ -394,7 +394,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateSliderFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is SliderFieldValue).Select(_ => _ as SliderFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is SliderFieldValue).Select(_ => _ as SliderFieldValue);
 
             foreach (var record in records)
             {
@@ -416,7 +416,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateSwitchFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is SwitchFieldValue).Select(_ => _ as SwitchFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is SwitchFieldValue).Select(_ => _ as SwitchFieldValue);
 
             foreach (var record in records)
             {
@@ -433,7 +433,7 @@ namespace EasyForm.Core.Validation.Default
 
         protected virtual Task ValidateUploadFieldValueAsync(FormRecordValidationContext context)
         {
-            var records = context.FormRecord.FieldValues.Where(_ => _ is UploaderFieldValue).Select(_ => _ as UploaderFieldValue);
+            var records = context.FormRecord.Values.Where(_ => _ is UploaderFieldValue).Select(_ => _ as UploaderFieldValue);
 
             foreach (var record in records)
             {

@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddFormStore<TContext>(
             this IServiceCollection services,
             Action<FormStoreOptions> storeOptionsAction = null)
-            where TContext : DbContext, IFormConfigDbContext
+            where TContext : DbContext, IFormDbContext
         {
             var options = new FormStoreOptions();
             services.AddSingleton(options);
@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.ConfigureDbContext?.Invoke(dbCtxBuilder);
             });
 
-            services.AddScoped<IFormConfigDbContext, TContext>();
+            services.AddScoped<IFormDbContext, TContext>();
 
             return services;
         }
