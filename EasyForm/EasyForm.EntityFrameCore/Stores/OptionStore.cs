@@ -36,7 +36,10 @@ namespace EasyForm.EntityFrameCore.Stores
 
         public Task<IEnumerable<Option>> GetAsync(string purpose)
         {
-            var entities = _formDbContext.Options.Where(x => x.Purpose.Equals(purpose, StringComparison.CurrentCultureIgnoreCase));
+            var entities = _formDbContext.Options.Where(x => x.Purpose.Equals(purpose, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            var options = entities.ToModel();
+
+            return Task.FromResult(options);
         }
 
         public Task RemoveAsync(string purpose)

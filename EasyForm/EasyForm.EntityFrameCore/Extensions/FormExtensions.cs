@@ -165,7 +165,7 @@ namespace EasyForm.EntityFrameCore.Extensions
             }
         }
 
-        public static IEnumerable<Core.Models.Forms.Option> ToModel(IEnumerable<Entities.Forms.Option> entities)
+        public static IEnumerable<Core.Models.Forms.Option> ToModel(this IEnumerable<Entities.Forms.Option> entities)
         {
             var options = new List<Core.Models.Forms.Option>();
             if (entities.IsNullOrEmpty()) return options;
