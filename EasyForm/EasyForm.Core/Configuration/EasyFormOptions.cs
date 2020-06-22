@@ -4,6 +4,6 @@ namespace EasyForm.Core.Configuration
 {
     public class EasyFormOptions
     {
-        public IOptionsStore DefaultFieldOptionsStore { get; set; }
+        public IOptionStore DefaultFieldOptionsStore { get; set; }
     }
 }

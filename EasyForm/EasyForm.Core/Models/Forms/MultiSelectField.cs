@@ -1,5 +1,6 @@
 ﻿using EasyForm.Core.Interfaces;
 using EasyForm.Core.Models.Forms.Base;
+using System;
 using System.Collections.Generic;
 
 namespace EasyForm.Core.Models.Forms
@@ -15,8 +16,7 @@ namespace EasyForm.Core.Models.Forms
     : base(fieldName, displayName)
         {
         }
-        public IEnumerable<FieldOption> Options { get; set; }
-        public string OptionsProvider { get; set; }
-        public IOptionsStore OptionsStore { get; set; }
+        public IEnumerable<Option> Options { get; set; }
+        public Func<string, IEnumerable<Option>> OptionsFunc { get; set; }
     }
 }

@@ -138,7 +138,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Key = "test",
                 Fields = new List<Field>
                 {
-                    new CascaderField{ FieldName="test" ,Options = new List<FieldOption>() }
+                    new CascaderField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -170,7 +170,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Key = "test",
                 Fields = new List<Field>
                 {
-                    new CheckboxField{ FieldName="test" ,Options = new List<FieldOption>() }
+                    new CheckboxField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -202,7 +202,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Key = "test",
                 Fields = new List<Field>
                 {
-                    new MultiSelectField{ FieldName="test" ,Options = new List<FieldOption>() }
+                    new MultiSelectField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -234,7 +234,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Key = "test",
                 Fields = new List<Field>
                 {
-                    new RadioField{ FieldName="test" ,Options = new List<FieldOption>() }
+                    new RadioField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -266,7 +266,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Key = "test",
                 Fields = new List<Field>
                 {
-                    new SelectField{ FieldName="test" ,Options = new List<FieldOption>() }
+                    new SelectField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
             var context = new FormDefinitionValidationContext(form);
@@ -335,8 +335,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Key = "test",
                 Fields = new List<Field>
                 {
-                    new CheckboxField{ FieldName="test" ,Options = new List<FieldOption>(),
-                     OptionsProvider = "test", OptionsStore = new FakeFieldOptionsStore()}
+                    new CheckboxField{ FieldName="test" ,Options = new List<Option>(), OptionsFunc = str=> new List<Option>()}
                 }
             };
             var context = new FormDefinitionValidationContext(form);

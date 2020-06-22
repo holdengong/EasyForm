@@ -5,21 +5,26 @@ using System.Threading.Tasks;
 
 namespace EasyForm.Core.UnitTests.Stubs
 {
-    public class FakeFieldOptionsStore : IOptionsStore
+    public class FakeFieldOptionsStore : IOptionStore
     {
-        public Task AddAsync(string name, IEnumerable<FieldOption> options)
+        public Task AddAsync(string name, IEnumerable<Option> options)
         {
             return Task.CompletedTask;
         }
 
-        public Task<IEnumerable<FieldOption>> GetAsync(string name)
+        public Task<IEnumerable<Option>> GetAsync(string purpose)
         {
-            return Task.FromResult(null as IEnumerable<FieldOption>);
+            return Task.FromResult(null as IEnumerable<Option>);
         }
 
-        public Task RemoveAsync(string name)
+        public Task RemoveAsync(string purpose)
         {
             return Task.CompletedTask;
+        }
+
+        public Task UpdateAsync(string purpose, IEnumerable<Option> options)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

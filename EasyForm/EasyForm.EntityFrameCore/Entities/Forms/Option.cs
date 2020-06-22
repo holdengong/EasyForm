@@ -8,7 +8,7 @@ namespace EasyForm.EntityFrameCore.Entities.Forms
     {
         public string Purpose { get; set; }
         public string Label { get; set; }
-        public int Value { get; set; }
-        public int ParentId { get; set; }
+        public string Value { get; set; }
+        public string HierarchyCode { get; set; }
     }
 }

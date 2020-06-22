@@ -1,4 +1,6 @@
-﻿using EasyForm.EntityFrameCore.Entities.Forms;
+﻿using EasyForm.Core.Extensions;
+using EasyForm.EntityFrameCore.Entities.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -113,6 +115,54 @@ namespace EasyForm.EntityFrameCore.Extensions
             var result = new List<Entities.Forms.ObjectField>();
             fields?.ToList().ForEach(x => result.Add(x.ToEntity()));
             return result;
+        }
+
+        public static IEnumerable<Entities.Forms.Option> ToEntity(this IEnumerable<Core.Models.Forms.Option> options, string purpose)
+        {
+            if (purpose.IsMissing())
+            {
+                throw new ArgumentNullException(nameof(purpose));
+            }
+
+            var entities = new List<Entities.Forms.Option>();
+            if (options.IsNullOrEmpty()) return entities;
+
+            foreach (var item in options)
+            {
+                var entity = new Entities.Forms.Option
+                {
+                    Label = item.Label,
+                    Value = item.Value,
+                    Purpose = purpose,
+                    HierarchyCode = item.Value
+                };
+
+                entities.Add(entity);
+
+                SetChildren(entity, item);
+            }
+
+            return entities;
+
+            void SetChildren(Entities.Forms.Option entity , Core.Models.Forms.Option item)
+            {
+                if (item.Children.IsNullOrEmpty()) return;
+
+                item.Children.ForEach(childOption =>
+                {
+                    var childEntity = new Entities.Forms.Option
+                    {
+                        Label = childOption.Label,
+                        Value = childOption.Value,
+                        Purpose = entity.Purpose,
+                        HierarchyCode = entity.HierarchyCode + "." + item.Value
+                    };
+
+                    SetChildren(childEntity, childOption);
+
+                    entities.Add(childEntity);
+                });
+            }
         }
     }
 }

@@ -240,14 +240,9 @@ namespace EasyForm.Core.Validation.Default
             {
                 if (field.Options.IsNullOrEmpty())
                 {
-                    if (field.OptionsProvider.IsMissing())
+                    if (field.OptionsFunc==null)
                     {
-                        context.SetError("field options name is required if options is numm or empty.");
-                        return Task.CompletedTask;
-                    }
-                    if (field.OptionsStore == null)
-                    {
-                        context.SetError("field options store is required if options is numm or empty.");
+                        context.SetError("field options func is required if options is numm or empty.");
                         return Task.CompletedTask;
                     }
                 }

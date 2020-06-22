@@ -141,48 +141,48 @@ namespace EasyForm.UnitTests.Validation
         public static IntField IntFieldDefinition =>
             new IntField { FieldName = "int" };
 
-        private static List<FieldOption> Options
+        private static List<Option> Options
         {
             get
             {
-                return new List<FieldOption>
+                return new List<Option>
             {
-                new FieldOption
+                new Option
                 {
                     Label = "test1",
-                    Value=1
+                    Value="1"
                 },
-                new FieldOption
+                new Option
                 {
                     Label = "test2",
-                    Value=2
+                    Value="2"
                 }
             };
             }
         }
 
-        private static List<FieldOption> OptionHasChildren
+        private static List<Option> OptionHasChildren
         {
             get
             {
-                return new List<FieldOption>
+                return new List<Option>
                 {
-                    new FieldOption
+                    new Option
                     {
                         Label = "test1",
-                        Value=1,
-                        Children = new List<FieldOption>
+                        Value="1",
+                        Children = new List<Option>
                         {
-                            new FieldOption{ Label = "test1.1", Value = 12 }
+                            new Option{ Label = "test1.1", Value = "12" }
                         }
                     },
-                    new FieldOption
+                    new Option
                     {
                         Label = "test2",
-                        Value=2,
-                        Children = new List<FieldOption>
+                        Value= "2",
+                        Children = new List<Option>
                         {
-                            new FieldOption{ Label = "test2.2", Value = 21 }
+                            new Option{ Label = "test2.2", Value = "21" }
                         }
                     }
                 };

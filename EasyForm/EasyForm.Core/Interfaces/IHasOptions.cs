@@ -10,18 +10,11 @@ namespace EasyForm.Core.Interfaces
         /// <summary>
         /// provide field options directly.
         /// </summary>
-        IEnumerable<FieldOption> Options { get; set; }
+        IEnumerable<Option> Options { get; set; }
 
         /// <summary>
-        /// get options from a store at runtime, required if options is null.
+        /// func to get options, input purpose,output options.
         /// </summary>
-        string OptionsProvider { get; set; }
-
-        /// <summary>
-        ///  /// <summary>
-        /// get options from a store at runtime, required if options is null.
-        /// </summary>
-        /// </summary>
-        IOptionsStore OptionsStore { get; set; }
+        Func<string, IEnumerable<Option>> OptionsFunc { get; set; }
     }
 }

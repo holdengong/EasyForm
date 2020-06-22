@@ -105,13 +105,14 @@ namespace EasyForm.EntityFrameCore.Contexts
                 entity.Property(x => x.FieldName).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<Option>(entity=> 
+            modelBuilder.Entity<Option>(entity =>
             {
                 entity.ToTable("options");
                 entity.Property(x => x.Label).HasMaxLength(200);
-                entity.Property(x=>x.Purpose).HasMaxLength(50);
+                entity.Property(x => x.Value).HasMaxLength(200).IsRequired();
+                entity.Property(x => x.Purpose).HasMaxLength(50).IsRequired();
 
-                entity.HasIndex(x => x.Purpose);
+                entity.HasIndex("purpose", "value").IsUnique();
             });
 
             base.OnModelCreating(modelBuilder);
