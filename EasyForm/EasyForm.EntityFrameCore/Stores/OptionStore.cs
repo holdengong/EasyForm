@@ -1,6 +1,7 @@
 ﻿using EasyForm.Core.Interfaces;
 using EasyForm.Core.Models.Forms;
 using EasyForm.EntityFrameCore.Contexts;
+using EasyForm.EntityFrameCore.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace EasyForm.EntityFrameCore.Stores
             _formDbContext = formDbContext;
         }
 
-        public Task AddAsync(string purpose, IEnumerable<Option> options)
+        public async Task AddAsync(string purpose, IEnumerable<Option> options)
         {
             var existing = _formDbContext.Options.Count(x => x.Purpose.Equals(purpose, StringComparison.CurrentCultureIgnoreCase));
             if (existing > 0)
@@ -26,22 +27,42 @@ namespace EasyForm.EntityFrameCore.Stores
                 throw new InvalidOperationException($"purpose {purpose} existed");
             }
 
-            return Task.CompletedTask;
+            var entities = options.ToEntity(purpose);
+
+            _formDbContext.Options.AddRange(entities);
+
+            await _formDbContext.SaveChangesAsync();
         }
 
         public Task<IEnumerable<Option>> GetAsync(string purpose)
         {
-            throw new NotImplementedException();
+            var entities = _formDbContext.Options.Where(x => x.Purpose.Equals(purpose, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public Task RemoveAsync(string purpose)
         {
-            throw new NotImplementedException();
+            var existing = _formDbContext.Options.Where(x => x.Purpose.Equals(purpose, StringComparison.CurrentCultureIgnoreCase));
+            _formDbContext.Options.RemoveRange(existing);
+            return Task.CompletedTask;
         }
 
-        public Task UpdateAsync(string purpose, IEnumerable<Option> options)
+        public async Task UpdateAsync(string purpose, IEnumerable<Option> options)
         {
-            throw new NotImplementedException();
+            using ( var trans = _formDbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var existing = _formDbContext.Options.Where(x => x.Purpose.Equals(purpose, StringComparison.CurrentCultureIgnoreCase));
+                    _formDbContext.Options.RemoveRange(existing);
+                    _formDbContext.Options.AddRange(options.ToEntity(purpose));
+                    await trans.CommitAsync();
+                }
+                catch (Exception ex)
+                {
+                    await trans.RollbackAsync();
+                    throw ex;
+                }
+            }
         }
     }
 }

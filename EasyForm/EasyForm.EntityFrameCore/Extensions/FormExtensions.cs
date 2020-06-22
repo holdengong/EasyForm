@@ -164,5 +164,44 @@ namespace EasyForm.EntityFrameCore.Extensions
                 });
             }
         }
+
+        public static IEnumerable<Core.Models.Forms.Option> ToModel(IEnumerable<Entities.Forms.Option> entities)
+        {
+            var options = new List<Core.Models.Forms.Option>();
+            if (entities.IsNullOrEmpty()) return options;
+
+            entities.OrderBy(x => x.HierarchyCode).ToList().ForEach(entity =>
+            {
+                var option = new Core.Models.Forms.Option
+                {
+                    Label = entity.Label,
+                    Value = entity.Value,
+                    Children = new List<Core.Models.Forms.Option>()
+                };
+
+                SetChildren(option, entity);
+            });
+
+            return options;
+
+            void SetChildren(Core.Models.Forms.Option option, Entities.Forms.Option entity)
+            {
+                var childEntities = entities.Where(x => x.Purpose == entity.Purpose && x.HierarchyCode.StartsWith(entity.HierarchyCode + "."));
+                if (childEntities.IsNullOrEmpty()) return;
+                childEntities.ToList().ForEach(childEntity =>
+                {
+                    var childOption = new Core.Models.Forms.Option
+                    {
+                        Label = childEntity.Label,
+                        Value = childEntity.Value,
+                        Children = new List<Core.Models.Forms.Option>()
+                    };
+
+                    SetChildren(childOption, childEntity);
+
+                    option.Children.Add(childOption);
+                });
+            }
+        }
     }
 }
