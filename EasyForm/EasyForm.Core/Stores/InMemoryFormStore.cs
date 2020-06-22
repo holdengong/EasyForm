@@ -55,7 +55,7 @@ namespace EasyForm.Core.Stores
             return Task.FromResult(forms as IEnumerable<Form>);
         }
 
-        public async Task<Form> GetByFormIdAsync(string formId)
+        public async Task<Form> GetByKeyAsync(string formId)
         {
             var form = forms.SingleOrDefault(_ => _.Key == formId);
             var context = new FormDefinitionValidationContext(form);
@@ -68,7 +68,7 @@ namespace EasyForm.Core.Stores
             return form;
         }
 
-        public Task RemoveByFormIdAsync(string formId)
+        public Task RemoveByKeyAsync(string formId)
         {
             var form = forms.SingleOrDefault(_ => _.Key == formId);
             if (form != null)

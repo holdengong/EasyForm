@@ -7,11 +7,11 @@ namespace EasyForm.Core.Interfaces
     public interface IFormStore
     {
         /// <summary>
-        /// get form by form id.
+        /// get form by form key.
         /// </summary>
-        /// <param name="formId"></param>
+        /// <param name="key"></param>
         /// <returns></returns>
-        Task<Form> GetByFormIdAsync(string formId);
+        Task<Form> GetByKeyAsync(string key);
 
         /// <summary>
         /// add form.
@@ -28,11 +28,11 @@ namespace EasyForm.Core.Interfaces
         Task UpdateAsync(Form form);
 
         /// <summary>
-        /// remove form by form id.
+        /// remove form by form key.
         /// </summary>
-        /// <param name="formId"></param>
+        /// <param name="key"></param>
         /// <returns></returns>
-        Task RemoveByFormIdAsync(string formId);
+        Task RemoveByKeyAsync(string key);
 
         /// <summary>
         /// get all form definitions.
