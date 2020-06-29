@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace EasyForm.Core.Validation.Contexts
 {
-    public class FormRecordValidationContext
+    public class RecordValidationContext
     {
         public Record FormRecord { get; }
 
@@ -17,7 +17,7 @@ namespace EasyForm.Core.Validation.Contexts
 
         public string FormId { get; set; }
 
-        public FormRecordValidationContext(string formId, Record formRecord)
+        public RecordValidationContext(string formId, Record formRecord)
         {
             FormRecord = formRecord;
             FieldRecordErrors = new Dictionary<FieldValue, string>();

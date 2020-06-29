@@ -2,7 +2,7 @@
 
 namespace EasyForm.Core.Models.Forms.Base
 {
-    public abstract class TextField : FieldDefinition<string>,
+    public abstract class TextField : Field<string>,
         IFuzzyFilterableField
     {
         public TextField()

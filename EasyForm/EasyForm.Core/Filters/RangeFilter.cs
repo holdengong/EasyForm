@@ -4,7 +4,7 @@ using EasyForm.Core.Models.Forms.Base;
 namespace EasyForm.Core.Filters
 {
     public class RangeFilter<TFieldDefinition, TDataType> : IRecordFilter
-        where TFieldDefinition : FieldDefinition<TDataType>, IRangeFilterableField
+        where TFieldDefinition : Field<TDataType>, IRangeFilterableField
     {
         public RangeFilter(TFieldDefinition fieldDefinition, TDataType min, TDataType max)
         {

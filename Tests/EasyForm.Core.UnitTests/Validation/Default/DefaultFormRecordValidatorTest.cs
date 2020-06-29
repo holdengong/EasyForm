@@ -1,7 +1,7 @@
 ﻿using EasyForm.Core.Configuration;
 using EasyForm.Core.Interfaces;
 using EasyForm.Core.Models;
-using EasyForm.Core.Models.Forms.Base;
+using EasyForm.Core.Models.Forms;
 using EasyForm.Core.Models.Records;
 using EasyForm.Core.Models.Records.Base;
 using EasyForm.Core.Validation.Contexts;
@@ -30,7 +30,7 @@ namespace EasyForm.UnitTests.Validation.Default
         [Fact]
         public async Task Validate_should_success()
         {
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, TestData.FormRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, TestData.FormRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeTrue();
         }
@@ -38,7 +38,7 @@ namespace EasyForm.UnitTests.Validation.Default
         [Fact]
         public void Context_is_null_should_throw()
         {
-            FormRecordValidationContext context = null;
+            RecordValidationContext context = null;
             Func<Task> func = async () => await validator.ValidateAsync(context);
             func.Should().Throw<ArgumentNullException>();
         }
@@ -46,7 +46,7 @@ namespace EasyForm.UnitTests.Validation.Default
         [Fact]
         public void Form_record_is_null_should_throw()
         {
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, null);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, null);
             Func<Task> func = async () => await validator.ValidateAsync(context);
             func.Should().Throw<ArgumentNullException>();
         }
@@ -56,7 +56,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var formRecord = TestData.FormRecord;
             formRecord.FormKey = null;
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             Func<Task> func = async () => await validator.ValidateAsync(context);
             func.Should().Throw<ArgumentNullException>();
         }
@@ -66,7 +66,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var formRecord = TestData.FormRecord;
             formRecord.Values = null;
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             Func<Task> func = async () => await validator.ValidateAsync(context);
             func.Should().Throw<ArgumentNullException>();
         }
@@ -76,7 +76,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var formRecord = TestData.FormRecord;
             formRecord.Values = new List<FieldValue>();
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             Func<Task> func = async () => await validator.ValidateAsync(context);
             func.Should().Throw<ArgumentNullException>();
         }
@@ -86,7 +86,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var formRecord = TestData.FormRecord;
             formRecord.Values.First().FieldDefinition = null;
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             Func<Task> func = async () => await validator.ValidateAsync(context);
             func.Should().Throw<ArgumentNullException>();
         }
@@ -96,7 +96,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var formRecord = TestData.FormRecord;
             formRecord.Values.First().FieldDefinition.FieldName = null;
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             Func<Task> func = async () => await validator.ValidateAsync(context);
             func.Should().Throw<ArgumentNullException>();
         }
@@ -106,7 +106,7 @@ namespace EasyForm.UnitTests.Validation.Default
         {
             var formRecord = TestData.FormRecord;
             formRecord.Values.First().FieldDefinition.FieldName = string.Empty;
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key,formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key,formRecord);
             Func<Task> func = async () => await validator.ValidateAsync(context);
             func.Should().Throw<ArgumentNullException>();
         }
@@ -120,7 +120,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is CheckboxFieldValue) as CheckboxFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -134,7 +134,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is CheckboxFieldValue) as CheckboxFieldValue).Value = new List<int>();
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -148,7 +148,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is DateFieldValue) as DateFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -162,7 +162,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is DateTimeFieldValue) as DateTimeFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -176,7 +176,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is DecimalFieldValue) as DecimalFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -190,7 +190,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is DecimalFieldValue) as DecimalFieldValue).Value = 0.9M;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -204,7 +204,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is DecimalFieldValue) as DecimalFieldValue).Value = 1.1M;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -218,7 +218,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is IntFieldValue) as IntFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -232,7 +232,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is IntFieldValue) as IntFieldValue).Value = 0;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -246,7 +246,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is IntFieldValue) as IntFieldValue).Value = 2;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -260,7 +260,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is MultiSelectFieldValue) as MultiSelectFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -274,7 +274,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is MultiSelectFieldValue) as MultiSelectFieldValue).Value = new List<int>();
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -288,7 +288,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is RadioFieldValue) as RadioFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -302,7 +302,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is RichTextFieldValue) as RichTextFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -316,7 +316,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is RichTextFieldValue) as RichTextFieldValue).Value = string.Empty;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -330,7 +330,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is SelectFieldValue) as SelectFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -344,7 +344,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is TextAreaFieldValue) as TextAreaFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -358,7 +358,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is TextAreaFieldValue) as TextAreaFieldValue).Value = string.Empty;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -372,7 +372,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is TimeFieldValue) as TimeFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -386,7 +386,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is TimeFieldValue) as TimeFieldValue).Value = string.Empty;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -400,7 +400,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is CascaderFieldValue) as CascaderFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -414,7 +414,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is CascaderFieldValue) as CascaderFieldValue).Value = new List<int>();
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -428,7 +428,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is ColorPickerFieldValue) as ColorPickerFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -442,7 +442,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is ColorPickerFieldValue) as ColorPickerFieldValue).Value = string.Empty;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -456,7 +456,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is SliderFieldValue) as SliderFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -470,7 +470,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is IntFieldValue) as IntFieldValue).Value = 0;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -484,7 +484,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is IntFieldValue) as IntFieldValue).Value = 2;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -498,7 +498,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is SwitchFieldValue) as SwitchFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -512,7 +512,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is UploaderFieldValue) as UploaderFieldValue).Value = null;
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -526,7 +526,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             (formRecord.Values.First(_ => _ is UploaderFieldValue) as UploaderFieldValue).Value = new List<File>();
 
-            var context = new FormRecordValidationContext(TestData.FormDefinition.Key, formRecord);
+            var context = new RecordValidationContext(TestData.FormDefinition.Key, formRecord);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }

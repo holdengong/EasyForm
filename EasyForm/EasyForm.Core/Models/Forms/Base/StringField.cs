@@ -2,7 +2,7 @@
 
 namespace EasyForm.Core.Models.Forms.Base
 {
-    public abstract class StringField : FieldDefinition<string>,
+    public abstract class StringField : Field<string>,
         IFuzzyFilterableField,
         ISortableField,
         IUniqueableField

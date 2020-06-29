@@ -1,6 +1,6 @@
 ﻿namespace EasyForm.Core.Models.Forms.Base
 {
-    public abstract class BoolField : FieldDefinition<bool?>
+    public abstract class BoolField : Field<bool?>
     {
         public BoolField()
         {

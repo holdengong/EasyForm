@@ -8,7 +8,7 @@ namespace EasyForm.Core.Extensions
     {
         public static ContainsFilter<TFieldDefinition, TDataType> Contains<TFieldDefinition, TDataType>
             (TFieldDefinition fieldDefinition, TDataType value)
-             where TFieldDefinition : FieldDefinition<TDataType>, IFuzzyFilterableField
+             where TFieldDefinition : Field<TDataType>, IFuzzyFilterableField
         {
             return new ContainsFilter<TFieldDefinition, TDataType>(fieldDefinition, value);
         }

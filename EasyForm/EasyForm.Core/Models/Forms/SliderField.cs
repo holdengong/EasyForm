@@ -1,6 +1,4 @@
-﻿using EasyForm.Core.Models.Forms.Base;
-
-namespace EasyForm.Core.Models.Forms
+﻿namespace EasyForm.Core.Models.Forms
 {
     public class SliderField : IntField
     {

@@ -4,7 +4,7 @@ using EasyForm.Core.Models.Forms.Base;
 namespace EasyForm.Core.Filters
 {
     public class EqualsFilter<TFieldDefinition, TDataType> : IRecordFilter
-        where TFieldDefinition : FieldDefinition<TDataType>, IFilterableField
+        where TFieldDefinition : Field<TDataType>, IFilterableField
     {
         public EqualsFilter(TFieldDefinition fieldDefinition, TDataType value)
         {

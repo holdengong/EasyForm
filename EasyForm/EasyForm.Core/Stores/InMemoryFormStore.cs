@@ -41,7 +41,7 @@ namespace EasyForm.Core.Stores
                 throw new ArgumentException("form id already exist");
             }
 
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await formValidator.ValidateAsync(context);
             if (!context.IsValid)
             {
@@ -58,7 +58,7 @@ namespace EasyForm.Core.Stores
         public async Task<Form> GetByKeyAsync(string formId)
         {
             var form = forms.SingleOrDefault(_ => _.Key == formId);
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await formValidator.ValidateAsync(context);
             if (!context.IsValid)
             {

@@ -2,7 +2,7 @@
 
 namespace EasyForm.Core.Validation.Contexts
 {
-    public class FormDefinitionValidationContext
+    public class FormValidationContext
     {
         public Form FormDefinition { get; }
 
@@ -10,7 +10,7 @@ namespace EasyForm.Core.Validation.Contexts
 
         public string ErrorMessage { get; set; }
 
-        public FormDefinitionValidationContext(Form formDefinition)
+        public FormValidationContext(Form formDefinition)
         {
             FormDefinition = formDefinition;
         }

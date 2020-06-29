@@ -15,7 +15,7 @@ namespace EasyForm.Core.Models.Forms
           : base(fieldName, displayName)
         {
         }
-        public IEnumerable<Option> Options { get; set; }
-        public Func<string, IEnumerable<Option>> OptionsFunc { get; set; }
+        public string OptionsPurpose { get; set; }
+        public string OptionsProviderName { get; set; }
     }
 }

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace EasyForm.EntityFrameCore.Stores
 {
-    public class OptionStore : IOptionStore
+    public class EntityFrameworkOptionStore : IOptionStore
     {
         private readonly FormDbContext _formDbContext;
 
-        public OptionStore(FormDbContext formDbContext)
+        public EntityFrameworkOptionStore(FormDbContext formDbContext)
         {
             _formDbContext = formDbContext;
         }
@@ -51,7 +51,7 @@ namespace EasyForm.EntityFrameCore.Stores
 
         public async Task UpdateAsync(string purpose, IEnumerable<Option> options)
         {
-            using ( var trans = _formDbContext.Database.BeginTransaction())
+            using (var trans = _formDbContext.Database.BeginTransaction())
             {
                 try
                 {

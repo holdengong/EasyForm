@@ -2,18 +2,15 @@
 
 namespace EasyForm.Core.Models.Forms.Base
 {
-    public abstract class ObjectField : FieldDefinition<object>
+    public abstract class ObjectField : Field<object>
     {
-        public Type ObjType { get; set; }
-
         public ObjectField()
         {
         }
 
-        public ObjectField(string fieldName, string displayName, Type objType)
+        public ObjectField(string fieldName, string displayName)
         : base(fieldName, displayName)
         {
-            ObjType = objType;
         }
     }
 
@@ -24,7 +21,7 @@ namespace EasyForm.Core.Models.Forms.Base
         }
 
         public ObjectField(string fieldName, string displayName)
-        : base(fieldName, displayName, typeof(TObjectType))
+        : base(fieldName, displayName)
         {
         }
     }

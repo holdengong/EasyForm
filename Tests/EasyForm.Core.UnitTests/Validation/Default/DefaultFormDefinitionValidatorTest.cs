@@ -30,7 +30,7 @@ namespace EasyForm.UnitTests.Validation.Default
 
             foreach (var form in forms)
             {
-                var context = new FormDefinitionValidationContext(form);
+                var context = new FormValidationContext(form);
                 await validator.ValidateAsync(context);
                 context.IsValid.Should().BeTrue();
             }
@@ -50,7 +50,7 @@ namespace EasyForm.UnitTests.Validation.Default
                       }
                   }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -63,7 +63,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Key = "test",
                 Fields = null
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -76,7 +76,7 @@ namespace EasyForm.UnitTests.Validation.Default
                 Key = "test",
                 Fields = new List<Field>()
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -92,7 +92,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new TextboxField{ FieldName="" }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -109,7 +109,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new TextboxField{ FieldName = "1"}
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -125,7 +125,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new CascaderField{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -141,7 +141,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new CascaderField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -157,7 +157,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new CheckboxField{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -173,7 +173,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new CheckboxField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -189,7 +189,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new MultiSelectField{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -205,7 +205,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new MultiSelectField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -221,7 +221,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new RadioField{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -237,7 +237,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new RadioField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -253,7 +253,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new SelectField{ FieldName="test" ,Options = null }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -269,7 +269,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new SelectField{ FieldName="test" ,Options = new List<Option>() }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -285,7 +285,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new UploaderField{ FieldName="test", AllowFileTypes=null }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -301,7 +301,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new UploaderField{ FieldName="test", AllowFileTypes= new List<string>() }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -322,7 +322,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     }
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeFalse();
         }
@@ -338,7 +338,7 @@ namespace EasyForm.UnitTests.Validation.Default
                     new CheckboxField{ FieldName="test" ,Options = new List<Option>(), OptionsFunc = str=> new List<Option>()}
                 }
             };
-            var context = new FormDefinitionValidationContext(form);
+            var context = new FormValidationContext(form);
             await validator.ValidateAsync(context);
             context.IsValid.Should().BeTrue();
         }

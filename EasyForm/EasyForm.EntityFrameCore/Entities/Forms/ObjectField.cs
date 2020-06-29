@@ -6,6 +6,6 @@ namespace EasyForm.EntityFrameCore.Entities.Forms
 {
     public class ObjectField : Field
     {
-        public string ObjType { get; set; }
+        public object DefaultValue { get; set; }
     }
 }

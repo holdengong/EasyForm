@@ -20,13 +20,13 @@ namespace EasyForm.Core.Models.Forms.Base
         public bool IsRequired { get; set; }
     }
 
-    public abstract class FieldDefinition<TDataType> : Field
+    public abstract class Field<TDataType> : Field
     {
-        public FieldDefinition()
+        public Field()
         {
         }
 
-        public FieldDefinition(string fieldName, string displayName)
+        public Field(string fieldName, string displayName)
             : base(fieldName, displayName)
         {
         }

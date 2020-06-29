@@ -1,26 +1,28 @@
 ﻿using EasyForm.Core.Interfaces;
+using EasyForm.Core.Models.Forms.Base;
+using System;
 
-namespace EasyForm.Core.Models.Forms.Base
+namespace EasyForm.Core.Models.Forms
 {
-    public class DecimalField : FieldDefinition<decimal?>,
+    public class DateTimeField : Field<DateTime?>,
         ISortableField,
         IRangeFilterableField,
         IUniqueableField
     {
-        public DecimalField()
+        public DateTimeField()
         {
 
         }
 
-        public DecimalField(string fieldName, string displayName)
+        public DateTimeField(string fieldName, string displayName)
           : base(fieldName, displayName)
         {
         }
 
-        public decimal? Max { get; set; }
-        public decimal? Min { get; set; }
+        public string Placeholder { get; set; }
         public bool AllowSort { get; set; }
         public bool AllowFilter { get; set; }
         public bool IsUnique { get; set; }
     }
+}
 }

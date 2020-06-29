@@ -4,7 +4,7 @@ using EasyForm.Core.Models.Forms.Base;
 namespace EasyForm.Core.Filters
 {
     public class ContainsFilter<TFieldDefinition, TDataType> : IRecordFilter
-        where TFieldDefinition : FieldDefinition<TDataType>, IFuzzyFilterableField
+        where TFieldDefinition : Field<TDataType>, IFuzzyFilterableField
     {
         public ContainsFilter(TFieldDefinition fieldDefinition, TDataType value)
         {

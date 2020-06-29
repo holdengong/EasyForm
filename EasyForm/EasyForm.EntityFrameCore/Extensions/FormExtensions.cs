@@ -1,4 +1,5 @@
 ﻿using EasyForm.Core.Extensions;
+using EasyForm.Core.Models.Forms;
 using EasyForm.EntityFrameCore.Entities.Forms;
 using System;
 using System.Collections.Generic;
@@ -8,18 +9,18 @@ namespace EasyForm.EntityFrameCore.Extensions
 {
     public static class FormExtensions
     {
-        public static Form ToEntity(this Core.Models.Forms.Form form)
+        public static Entities.Forms.Form ToEntity(this Core.Models.Forms.Form form)
         {
-            var result = new Form
+            var result = new Entities.Forms.Form
             {
                 Key = form.Key,
                 Created = form.Created,
                 Description = form.Description,
                 Updated = form.Updated,
                 BoolFields = form.Fields?.Where(x => x is Core.Models.Forms.Base.BoolField).Select(x => x as Core.Models.Forms.Base.BoolField).ToEntity(),
-                DateTimeFields = form.Fields?.Where(x => x is Core.Models.Forms.Base.DateTimeField).Select(x => x as Core.Models.Forms.Base.DateTimeField).ToEntity(),
-                DecimalFields = form.Fields?.Where(x => x is Core.Models.Forms.Base.DecimalField).Select(x => x as Core.Models.Forms.Base.DecimalField).ToEntity(),
-                IntFields = form.Fields?.Where(x => x is Core.Models.Forms.Base.IntField).Select(x => x as Core.Models.Forms.Base.IntField).ToEntity(),
+                DateTimeFields = form.Fields?.Where(x => x is Core.Models.Forms.DateTimeField).Select(x => x as Core.Models.Forms.DateTimeField).ToEntity(),
+                DecimalFields = form.Fields?.Where(x => x is Core.Models.Forms.DecimalField).Select(x => x as Core.Models.Forms.DecimalField).ToEntity(),
+                IntFields = form.Fields?.Where(x => x is Core.Models.Forms.IntField).Select(x => x as Core.Models.Forms.IntField).ToEntity(),
                 ObjectFields = form.Fields?.Where(x => x is Core.Models.Forms.Base.ObjectField).Select(x => x as Core.Models.Forms.Base.ObjectField).ToEntity()
             };
 
@@ -33,8 +34,27 @@ namespace EasyForm.EntityFrameCore.Extensions
                 DefaultValue = field.DefaultValue,
                 Description = field.Description,
                 FieldName = field.FieldName,
-                IsRequired = field.IsRequired
+                IsRequired = field.IsRequired,
+                FieldType = field.GetType().Name.ToLower()
             };
+        }
+
+        public static Core.Models.Forms.Base.BoolField ToModel(this Entities.Forms.BoolField field)
+        {
+            Type fieldType = field.GetType();
+            if (fieldType == typeof(SwitchField))
+            {
+                return new SwitchField
+                {
+                    DefaultValue = field.DefaultValue,
+                    Description = field.Description,
+                    DisplayName = field.DisplayName,
+                    FieldName = field.FieldName,
+                    IsRequired = field.IsRequired
+                };
+            }
+
+            throw new NotImplementedException($"unrecoganized bool field type: {fieldType.Name.ToLower()}");
         }
 
         public static IEnumerable<Entities.Forms.BoolField> ToEntity(this IEnumerable<Core.Models.Forms.Base.BoolField> fields)
@@ -44,24 +64,55 @@ namespace EasyForm.EntityFrameCore.Extensions
             return result;
         }
 
-        public static Entities.Forms.DateTimeField ToEntity(this Core.Models.Forms.Base.DateTimeField field)
+        public static IEnumerable<Core.Models.Forms.Base.BoolField> ToModel(this IEnumerable<Entities.Forms.BoolField> fields)
+        {
+            var result = new List<Core.Models.Forms.Base.BoolField>();
+            fields?.ToList().ForEach(x => result.Add(x.ToModel()));
+            return result;
+        }
+
+        public static Entities.Forms.DateTimeField ToEntity(this Core.Models.Forms.DateTimeField field)
         {
             return new Entities.Forms.DateTimeField
             {
                 Description = field.Description,
                 FieldName = field.FieldName,
-                IsRequired = field.IsRequired
+                IsRequired = field.IsRequired,
+                FieldType = field.GetFieldType()
             };
         }
 
-        public static IEnumerable<Entities.Forms.DateTimeField> ToEntity(this IEnumerable<Core.Models.Forms.Base.DateTimeField> fields)
+        public static Core.Models.Forms.DateTimeField ToModel(this Entities.Forms.DateTimeField field)
+        {
+            return new Core.Models.Forms.DateTimeField
+            {
+                AllowFilter = field.AllowFilter,
+                AllowSort = field.AllowSort,
+                DefaultValue = field.DefaultValue,
+                Description = field.Description,
+                DisplayName = field.DisplayName,
+                FieldName = field.FieldName,
+                IsRequired = field.IsRequired,
+                IsUnique = field.IsUnique,
+                Placeholder = field.Placeholder
+            };
+        }
+
+        public static IEnumerable<Entities.Forms.DateTimeField> ToEntity(this IEnumerable<Core.Models.Forms.DateTimeField> fields)
         {
             var result = new List<Entities.Forms.DateTimeField>();
             fields?.ToList().ForEach(x => result.Add(x.ToEntity()));
             return result;
         }
 
-        public static Entities.Forms.DecimalField ToEntity(this Core.Models.Forms.Base.DecimalField field)
+        public static IEnumerable<Core.Models.Forms.DateTimeField> ToModel(this IEnumerable<Entities.Forms.DateTimeField> entities)
+        {
+            var result = new List<Core.Models.Forms.DateTimeField>();
+            entities?.ToList().ForEach(x => result.Add(x.ToModel()));
+            return result;
+        }
+
+        public static Entities.Forms.DecimalField ToEntity(this Core.Models.Forms.DecimalField field)
         {
             return new Entities.Forms.DecimalField
             {
@@ -73,14 +124,40 @@ namespace EasyForm.EntityFrameCore.Extensions
                 Max = field.Max
             };
         }
-        public static IEnumerable<Entities.Forms.DecimalField> ToEntity(this IEnumerable<Core.Models.Forms.Base.DecimalField> fields)
+
+        public static Core.Models.Forms.DecimalField ToModel(this Entities.Forms.DecimalField entity)
+        {
+            return new Core.Models.Forms.DecimalField
+            {
+                AllowFilter = entity.AllowFilter,
+                IsUnique = entity.IsUnique,
+                IsRequired = entity.IsRequired,
+                FieldName = entity.FieldName,
+                DisplayName = entity.DisplayName,
+                AllowSort = entity.AllowSort,
+                Description = entity.Description,
+                DefaultValue = entity.DefaultValue,
+                Max = entity.Max,
+                Min = entity.Min
+            };
+        }
+
+        public static IEnumerable<Entities.Forms.DecimalField> ToEntity(this IEnumerable<Core.Models.Forms.DecimalField> fields)
         {
             var result = new List<Entities.Forms.DecimalField>();
             fields?.ToList().ForEach(x => result.Add(x.ToEntity()));
             return result;
         }
 
-        public static Entities.Forms.IntField ToEntity(this Core.Models.Forms.Base.IntField field)
+        public static IEnumerable<Core.Models.Forms.DecimalField> ToEntity(this IEnumerable<Entities.Forms.DecimalField> entities)
+        {
+            var result = new List<Core.Models.Forms.DecimalField>();
+            entities?.ToList().ForEach(x => result.Add(x.ToModel()));
+            return result;
+        }
+
+
+        public static Entities.Forms.IntField ToEntity(this Core.Models.Forms.IntField field)
         {
             return new Entities.Forms.IntField
             {
@@ -89,10 +166,18 @@ namespace EasyForm.EntityFrameCore.Extensions
                 IsRequired = field.IsRequired,
                 DefaultValue = field.DefaultValue,
                 Min = field.Min,
-                Max = field.Max
+                Max = field.Max,
+                FieldType = field.GetFieldType()
             };
         }
-        public static IEnumerable<Entities.Forms.IntField> ToEntity(this IEnumerable<Core.Models.Forms.Base.IntField> fields)
+
+        public static Core.Models.Forms.IntField ToModel(this Entities.Forms.IntField entity)
+        {
+            var fieldType = entity.fiel
+        }
+
+
+        public static IEnumerable<Entities.Forms.IntField> ToEntity(this IEnumerable<Core.Models.Forms.IntField> fields)
         {
             var result = new List<Entities.Forms.IntField>();
             fields?.ToList().ForEach(x => result.Add(x.ToEntity()));
@@ -106,7 +191,8 @@ namespace EasyForm.EntityFrameCore.Extensions
                 Description = field.Description,
                 FieldName = field.FieldName,
                 IsRequired = field.IsRequired,
-                ObjType = field.ObjType.Name
+                ObjType = field.ObjType.Name,
+                FieldType = field.GetFieldType()
             };
         }
 
@@ -202,6 +288,11 @@ namespace EasyForm.EntityFrameCore.Extensions
                     option.Children.Add(childOption);
                 });
             }
+        }
+
+        private static string GetFieldType(this Core.Models.Forms.Base.Field field)
+        {
+            return field.GetType().Name.ToLower().Replace("field", string.Empty);
         }
     }
 }

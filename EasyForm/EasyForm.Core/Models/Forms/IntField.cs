@@ -1,8 +1,9 @@
 ﻿using EasyForm.Core.Interfaces;
+using EasyForm.Core.Models.Forms.Base;
 
-namespace EasyForm.Core.Models.Forms.Base
+namespace EasyForm.Core.Models.Forms
 {
-    public class IntField : FieldDefinition<int?>,
+    public class IntField : Field<int?>,
         ISortableField,
         IRangeFilterableField,
         IUniqueableField
